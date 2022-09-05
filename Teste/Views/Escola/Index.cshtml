@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Lista de Escolas";
+}
+<div class="text-center">
+
+    <div class="d-grid gap-2 d-nd-flex justify-content-md-start">
+        <a class="btn btn-primary" role="button" asp-controller="Escola" asp-action="Adicionar">Adicionar</a>
+        <br/>
+
+    </div>
+
+    <h1 class = "">Escolas</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Inep</th>
+      <th scope="col">Contato</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-primary" asp-controller="Escola" asp-action="Editar">Editar</a>
+                <a class="btn btn-danger" asp-controller="Escola" asp-action="ExcluirConfirmacao">Excluir</a>
+          </div>
+      </td>  
+
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-primary" asp-controller="Escola" asp-action="Editar">Editar</a>
+                <a class="btn btn-danger" asp-controller="Escola" asp-action="ExcluirConfirmacao">Excluir</a>
+          </div>
+      </td>
+    </tr>
+    <tr>
+       <th scope="row">2</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+          <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-primary"  asp-controller="Escola" asp-action="Editar">Editar</a>
+                <a class="btn btn-danger" asp-controller="Escola" asp-action="ExcluirConfirmacao">Excluir</a>
+          </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
