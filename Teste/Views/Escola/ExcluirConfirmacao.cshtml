@@ -1,14 +1,15 @@
-﻿@{
+﻿@model EscolaModel
+@{
 	ViewData["Title"] = "Confirmação apagar o cadastro da Escola";
 }
 
 <div class="text-center">
 
-	<h3>Deseja excluir o cadastro da escola ?</h3>
+	<h3>Deseja excluir o cadastro da escola (@Model.Nome)?</h3>
 
 </div>
 
 <br/>
 
-<a class="btn btn-primary btn-block" role="button" asp-controller="Escola" asp-action="Excluir"> Confirmar </a>
-<a class="btn btn-danger btn-block" role="button" asp-controller="Escola" asp-action="Index"> Cancelar </a>
+<a class="btn btn-danger btn-block" role="button" asp-controller="Escola" asp-action="Excluir" asp-route-id="@Model.Id" > Confirmar </a>
+<a class="btn btn-secondary btn-block" role="button" asp-controller="Escola" asp-action="Index"> Cancelar </a>

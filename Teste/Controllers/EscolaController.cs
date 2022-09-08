@@ -1,12 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using Teste.Models;
+using Teste.Repositorio;
 
 namespace Teste.Controllers
 {
     public class EscolaController : Controller
     {
+        private readonly IEscolaRepositorio _escolaRepositorio;
+        public EscolaController(IEscolaRepositorio escolaRepositorio)
+        {
+            _escolaRepositorio = escolaRepositorio;
+        }
         public IActionResult Index()
         {
-            return View();
+            List<EscolaModel> escolas = _escolaRepositorio.BuscarTodos();
+            return View(escolas);
         }
 
         public IActionResult Adicionar()
@@ -14,15 +23,44 @@ namespace Teste.Controllers
             return View();
         }
 
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            EscolaModel escola = _escolaRepositorio.ListarPorId(id);
+            return View(escola);
         }
 
-        public IActionResult ExcluirConfirmacao()
+        public IActionResult ExcluirConfirmacao(int id)
         {
-            return View();
+            EscolaModel escola = _escolaRepositorio.ListarPorId(id);
+            return View(escola);
         }
 
+        public IActionResult Excluir(int id)
+        {
+            _escolaRepositorio.Excluir(id);
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        public IActionResult Adicionar(EscolaModel escola)
+        {
+            if (ModelState.IsValid)
+            {
+            _escolaRepositorio.Adicionar(escola);
+
+            return RedirectToAction("Index");
+            }
+            return View(escola);
+
+        }
+        [HttpPost]
+        public IActionResult Editar(EscolaModel escola)
+        {
+            _escolaRepositorio.Atualizar(escola);
+
+            return RedirectToAction("Index");
+
+        }
     }
 }

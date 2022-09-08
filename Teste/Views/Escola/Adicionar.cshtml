@@ -1,36 +1,36 @@
-﻿@{
+﻿@model EscolaModel
+@{
     ViewData["Title"] = "Adicionar Escola";
 }
 <div class="text-center">
 
-    <h1 class = "display 4">Adicionar uma Escola</h1>
+    <h1 class="display-4">Adicionar uma Escola</h1>
 
 </div>
 
-<form>
- <div class="form-group">
-        <label for = "nome" class = "form-label"> Nome </label>
-        <input type = "text" class = "form-control" placeholder = "Digite o nome">
+<form asp-controller="Escola" asp-action="Adicionar" method="post">
+
+    <div class="form-group">
+        <label for="nome"> Nome </label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o Nome">
     </div>
     
-    <br/>
 
-    <div class = "form-group">
-        <label for = "inep" class = "form-label"> Código INEP </label>
-        <input type = "text" class = "form-control" placeholder = "Digite o código INEP">
+    <div class="form-group">
+        <label for="inep"> Código INEP </label>
+        <input type="number"  asp-for="Inep" class="form-control" placeholder="Digite o código INEP">
     </div>
 
-    <br/>
 
-    <div class = "form-group">
-        <label for = "contato" class = "form-label"> Contato </label>
-        <input type = "text" class = "form-control" placeholder = "Digite o contato">
+    <div class="form-group">
+        <label for="contato"> Contato </label>
+        <input type="text" asp-for="Contato" class="form-control" placeholder="Digite o Contato">
     </div>
 
-    <br/>
 
-    <button type = "submit" class = "btn btn-primary btn-block"> Salvar </button>
-    <a class = "btn btn-primary" asp-controller = "Escola" asp-action = "Index" role = "button"> Voltar </a>
+    <button type="submit" class="btn btn-primary"> Salvar </button>
+    <a class="btn btn-secondary" asp-controller="Escola" asp-action="Index" role="button">Voltar</a>
+
 </form>
    
 

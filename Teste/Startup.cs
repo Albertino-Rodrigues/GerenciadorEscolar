@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Teste.Data;
+using Teste.Repositorio;
 
 namespace Teste
 {
@@ -21,39 +22,38 @@ namespace Teste
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<BancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
-
+            services.AddScoped<IEscolaRepositorio, EscolaRepositorio>();
         }
 
-        public void Configure(IApplicationBuilder application, IWebHostEnvironment env)
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                application.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
             }
             else
             {
-                application.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error");
             }
+            app.UseStaticFiles();
 
-            application.UseStaticFiles();
+            app.UseRouting();
 
-            application.UseRouting();
+            app.UseAuthorization();
 
-            application.UseAuthentication();
-
-            application.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action = Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-
-
     }
 }
