@@ -1,0 +1,38 @@
+﻿@model TurmaModel
+@{
+    ViewData["Title"] = "Adicionar Turma";
+}
+<div class="text-center">
+
+    <h1 class="display-4">Adicionar uma Turma</h1>
+
+</div>
+
+<form asp-controller="Turma" asp-action="Adicionar" method="post">
+
+    <div class="form-group">
+        <label for="nome"> Descrição </label>
+        <input type="text" asp-for="Descricao" class="form-control" placeholder="Digite a descrição da turma">
+    </div>
+    
+
+    <div class="form-group">
+        <label for="composicaoEnsino"> Composição de Ensino </label>
+        <input type="text"  asp-for="ComposicaoEnsino" class="form-control" placeholder="Digite a composição de ensino da turma">
+    </div>
+
+
+    <div class="form-group">
+        <label for="anoEscolar"> Ano Escolar </label>
+        <input type="text" asp-for="AnoEscolar" class="form-control" placeholder="Digite o ano escolar">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary"> Salvar </button>
+    <a class="btn btn-secondary" asp-controller="Turma" asp-action="Index" role="button">Voltar</a>
+
+</form>
+   
+
+
+    

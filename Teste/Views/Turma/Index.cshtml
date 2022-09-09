@@ -1,0 +1,46 @@
+﻿@model List<TurmaModel>
+@{
+    ViewData["Title"] = "Lista de Turmas";
+}
+<div class="text-center">
+    <div class="text-left">
+        <a class="btn btn-primary" role="button" asp-controller="Turma" asp-action="Adicionar">Adicionar</a>
+
+    </div>
+
+     <br/>
+
+    <h1 class="display-4">Turmas</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Composição de ensino</th>
+      <th scope="col">Ano escolar</th>
+    </tr>
+  </thead>
+  <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (TurmaModel turma in Model)
+                {
+                    <tr>
+                      <th scope="row">@turma.Id</th>
+                      <td>@turma.Descricao</td>
+                      <td>@turma.ComposicaoEnsino</td>
+                      <td>@turma.AnoEscolar</td>
+                      <td>
+                          <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-info"  asp-controller="Aluno" asp-action="Alunos">Alunos</a>
+                                        <a role="button" class="btn btn-primary" asp-route-id="@turma.Id" asp-controller="Turma" asp-action="Editar">Editar</a>
+                                        <a role="button" class="btn btn-danger" asp-route-id="@turma.Id" asp-controller="Turma" asp-action="ExcluirConfirmacao">Excluir</a>
+                          </div>
+                      </td>
+                    </tr>
+                }
+            }
+  </tbody>
+</table>
+</div>
+

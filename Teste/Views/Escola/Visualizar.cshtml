@@ -10,7 +10,7 @@
 
      <br/>
 
-    <h1 class="display-4">Escolas</h1>
+    <h1 class="display-4">Turmas da Escola</h1>
 <table class="table">
   <thead>
     <tr>
@@ -32,8 +32,8 @@
               <td>@escola.Contato</td>
               <td>
                   <div class="btn-group" role="group">
-                        <a role="button" class="btn btn-info"  asp-controller="Turma" asp-action="Index">Turmas</a>
-                        <a role="button" class="btn btn-primary" asp-route-id="@escola.Id" asp-controller="Escola" asp-action="Editar">Editar</a>
+                        <a role="button" class="btn btn-info" asp-route-id="@escola.Id" asp-controller="Escola" asp-action="Visualizar">Visualizar</a>
+                        <a role="button" class="btn btn-primary" asp-route-id="@escola.Id" asp-controller="Escola" asp-action="Editar">Editar</a>                       
                         <a role="button" class="btn btn-danger" asp-route-id="@escola.Id" asp-controller="Escola" asp-action="ExcluirConfirmacao">Excluir</a>
                   </div>
               </td>
