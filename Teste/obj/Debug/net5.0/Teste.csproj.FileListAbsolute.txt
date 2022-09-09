@@ -392,3 +392,7 @@ C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\net5.0\Razor\Views\Turma\
 C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\net5.0\Razor\Views\Turma\Adicionar.cshtml.g.cs
 C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\net5.0\Razor\Views\Turma\Editar.cshtml.g.cs
 C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\net5.0\Razor\Views\Turma\ExcluirConfirmacao.cshtml.g.cs
+C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\net5.0\Razor\Views\Aluno\Adicionar.cshtml.g.cs
+C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\net5.0\Razor\Views\Aluno\Editar.cshtml.g.cs
+C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\net5.0\Razor\Views\Aluno\ExcluirConfirmacao.cshtml.g.cs
+C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\net5.0\Razor\Views\Aluno\Index.cshtml.g.cs

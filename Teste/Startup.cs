@@ -30,6 +30,8 @@ namespace Teste
                 .AddDbContext<BancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
             services.AddScoped<IEscolaRepositorio, EscolaRepositorio>();
             services.AddScoped<ITurmaRepositorio, TurmaRepositorio>();
+            services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

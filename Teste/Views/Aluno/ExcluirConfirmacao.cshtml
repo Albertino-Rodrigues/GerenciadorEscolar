@@ -1,0 +1,15 @@
+﻿@model AlunoModel
+@{
+	ViewData["Title"] = "Confirmação apagar o cadastro do Aluno";
+}
+
+<div class="text-center">
+
+	<h3>Deseja excluir o cadastro do aluno (@Model.Nome)?</h3>
+
+</div>
+
+<br/>
+
+<a class="btn btn-danger btn-block" role="button" asp-controller="Aluno" asp-action="Excluir" asp-route-id="@Model.Id" > Confirmar </a>
+<a class="btn btn-secondary btn-block" role="button" asp-controller="Aluno" asp-action="Index"> Cancelar </a>

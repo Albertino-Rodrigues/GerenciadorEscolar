@@ -14,5 +14,7 @@ namespace Teste.Data
 
 		public DbSet<TurmaModel> Turmas { get; set; }
 
+		public DbSet<AlunoModel> Alunos { get; set; }
+
 	}
 }

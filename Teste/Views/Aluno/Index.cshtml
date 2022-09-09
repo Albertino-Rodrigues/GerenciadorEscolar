@@ -1,0 +1,45 @@
+﻿@model List<AlunoModel>
+@{
+    ViewData["Title"] = "Lista de Alunos";
+}
+<div class="text-center">
+    <div class="text-left">
+        <a class="btn btn-primary" role="button" asp-controller="Aluno" asp-action="Adicionar">Adicionar</a>
+   
+    </div>
+
+     <br/>
+
+    <h1 class="display-4"> Alunos </h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nome</th>
+      <th scope="col">CPF</th>
+      <th scope="col">Data de Nascimento</th>
+    </tr>
+  </thead>
+  <tbody>
+    @if (Model != null && Model.Any())
+   {
+       foreach (AlunoModel aluno in Model)
+       {
+            <tr>
+              <th scope="row">@aluno.Id</th>
+              <td>@aluno.Nome</td>
+              <td>@aluno.Cpf</td>
+              <td>@aluno.DataNasc</td>
+              <td>
+                  <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-primary" asp-route-id="@aluno.Id" asp-controller="Aluno" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-danger" asp-route-id="@aluno.Id" asp-controller="Aluno" asp-action="ExcluirConfirmacao">Excluir</a>
+                  </div>
+              </td>
+            </tr>
+       }
+   }
+  </tbody>
+</table>
+</div>
+

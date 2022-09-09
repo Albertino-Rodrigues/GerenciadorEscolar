@@ -1,0 +1,38 @@
+﻿@model AlunoModel
+@{
+    ViewData["Title"] = "Adicionar um aluno";
+}
+<div class="text-center">
+
+    <h1 class="display-4">Adicionar um aluno</h1>
+
+</div>
+
+<form asp-controller="Aluno" asp-action="Adicionar" method="post">
+
+    <div class="form-group">
+        <label for="nome"> Nome </label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o Nome">
+    </div>
+    
+
+    <div class="form-group">
+        <label for="cpf"> CPF </label>
+        <input type="number"  asp-for="Cpf" class="form-control" placeholder="Digite o CPF">
+    </div>
+
+
+    <div class="form-group">
+        <label for="contato"> Data de nascimento </label>
+        <input type="number" asp-for="DataNasc" class="form-control" placeholder="Digite a data de nascimento">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary"> Salvar </button>
+    <a class="btn btn-secondary" asp-controller="Aluno" asp-action="Index" role="button">Voltar</a>
+
+</form>
+   
+
+
+    
