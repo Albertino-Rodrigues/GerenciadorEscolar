@@ -8,8 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Teste.Data;
-using Teste.Repositorio;
+using Api.Data;
+using Api.Repositorio;
 
 namespace Teste
 {

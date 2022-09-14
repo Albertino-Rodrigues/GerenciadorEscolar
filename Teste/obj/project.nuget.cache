@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8sCNIi7zfArKxSwRvmcwbXBnDgyr4yXPy4mnlyWunoaaVYG3LL9uplUvprOhehaLb+InmWi0De5g4Vei00Cnww==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\Yi Suchong\\source\\repos\\Teste\\Teste\\Teste.csproj",
+  "dgSpecHash": "KPSPuVqPPnIPcDT93yD3/W6TYZzq7aMtfRQwUpWWAVWzreK4zzJm0Gz8rvgZ9AMljU4inzepS7OhLqqMPU7pSg==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Teste\\Teste.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yi Suchong\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Yi Suchong\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\5.0.5\\microsoft.aspnetcore.mvc.razor.extensions.5.0.5.nupkg.sha512",
@@ -113,5 +113,15 @@
     "C:\\Users\\Yi Suchong\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Yi Suchong\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1108",
+      "level": "Error",
+      "message": "Ciclo detectado. \r\n  Teste -> Api -> Teste.",
+      "libraryId": "Teste",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
 }

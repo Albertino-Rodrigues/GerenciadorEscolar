@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Teste.Models;
-using Teste.Repositorio;
+using Api.Repositorio;
 
 namespace Teste.Controllers
 {

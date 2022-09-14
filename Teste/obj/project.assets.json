@@ -1988,6 +1988,25 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Api/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "5.0.5",
+          "Microsoft.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.5",
+          "Teste": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Api.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Api.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -6629,10 +6648,16 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Api/1.0.0": {
+      "type": "project",
+      "path": "../Api/Api.csproj",
+      "msbuildProject": "../Api/Api.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Api >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 5.0.5",
       "Microsoft.EntityFrameworkCore >= 5.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.5",
@@ -6647,11 +6672,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yi Suchong\\source\\repos\\Teste\\Teste\\Teste.csproj",
+      "projectUniqueName": "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Teste\\Teste.csproj",
       "projectName": "Teste",
-      "projectPath": "C:\\Users\\Yi Suchong\\source\\repos\\Teste\\Teste\\Teste.csproj",
+      "projectPath": "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Teste\\Teste.csproj",
       "packagesPath": "C:\\Users\\Yi Suchong\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yi Suchong\\source\\repos\\Teste\\Teste\\obj\\",
+      "outputPath": "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Teste\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6671,7 +6696,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Api\\Api.csproj": {
+              "projectPath": "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Api\\Api.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -6731,5 +6760,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1108",
+      "level": "Error",
+      "message": "Ciclo detectado. \r\n  Teste -> Api -> Teste.",
+      "libraryId": "Teste",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
 }
