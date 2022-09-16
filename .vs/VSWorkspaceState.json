@@ -2,14 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\Api",
-    "\\Teste",
-    "\\Teste\\Views",
-    "\\Teste\\Views\\Aluno",
-    "\\Teste\\Views\\Escola",
-    "\\Teste\\Views\\Home",
-    "\\Teste\\Views\\Shared",
-    "\\Teste\\Views\\Turma"
+    "\\Api\\bin",
+    "\\Api\\obj",
+    "\\Api\\obj\\Debug",
+    "\\Api\\obj\\Release",
+    "\\Biblioteca"
   ],
-  "SelectedNode": "\\Api\\Api.csproj",
+  "SelectedNode": "\\Teste.sln",
   "PreviewInSolutionExplorer": false
 }

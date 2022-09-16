@@ -1993,10 +1993,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "Biblioteca": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "5.0.5",
           "Microsoft.EntityFrameworkCore": "5.0.5",
-          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.5",
-          "Teste": "1.0.0"
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.5"
         },
         "compile": {
           "bin/placeholder/Api.dll": {}
@@ -2007,6 +2007,21 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "Biblioteca/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "5.0.5",
+          "Microsoft.EntityFrameworkCore": "5.0.5",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.5"
+        },
+        "compile": {
+          "bin/placeholder/Biblioteca.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Biblioteca.dll": {}
+        }
       }
     }
   },
@@ -6653,11 +6668,17 @@
       "type": "project",
       "path": "../Api/Api.csproj",
       "msbuildProject": "../Api/Api.csproj"
+    },
+    "Biblioteca/1.0.0": {
+      "type": "project",
+      "path": "../Biblioteca/Biblioteca.csproj",
+      "msbuildProject": "../Biblioteca/Biblioteca.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "Api >= 1.0.0",
+      "Biblioteca >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 5.0.5",
       "Microsoft.EntityFrameworkCore >= 5.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.5",
@@ -6699,6 +6720,9 @@
           "projectReferences": {
             "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Api\\Api.csproj": {
               "projectPath": "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Api\\Api.csproj"
+            },
+            "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Biblioteca\\Biblioteca.csproj": {
+              "projectPath": "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Biblioteca\\Biblioteca.csproj"
             }
           }
         }
@@ -6760,16 +6784,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Ciclo detectado. \r\n  Teste -> Api -> Teste.",
-      "libraryId": "Teste",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    }
-  ]
+  }
 }

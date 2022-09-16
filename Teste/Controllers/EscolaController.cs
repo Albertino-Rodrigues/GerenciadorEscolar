@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Teste.Models;
-using Api.Repositorio;
+using Biblioteca.Models;
+using Biblioteca.Repositorio;
 
-namespace Teste.Controllers
+namespace Biblioteca.Controllers
 {
     public class EscolaController : Controller
     {
@@ -18,16 +18,41 @@ namespace Teste.Controllers
             return View(escolas);
         }
 
+        [HttpGet]
         public IActionResult Adicionar()
         {
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Adicionar(EscolaModel escola)
+        {
+            if (ModelState.IsValid)
+            {
+                _escolaRepositorio.Adicionar(escola);
+
+                return RedirectToAction("Index");
+            }
+            return View(escola);
+
+        }
+
+        [HttpGet]
         public IActionResult Editar(int id)
         {
             EscolaModel escola = _escolaRepositorio.ListarPorId(id);
             return View(escola);
         }
+
+        [HttpPost]
+        public IActionResult Editar(EscolaModel escola)
+        {
+            _escolaRepositorio.Atualizar(escola);
+
+            return RedirectToAction("Index");
+
+        }
+
 
         public IActionResult ExcluirConfirmacao(int id)
         {
@@ -41,26 +66,5 @@ namespace Teste.Controllers
             return RedirectToAction("Index");
         }
 
-
-        [HttpPost]
-        public IActionResult Adicionar(EscolaModel escola)
-        {
-            if (ModelState.IsValid)
-            {
-            _escolaRepositorio.Adicionar(escola);
-
-            return RedirectToAction("Index");
-            }
-            return View(escola);
-
-        }
-        [HttpPost]
-        public IActionResult Editar(EscolaModel escola)
-        {
-            _escolaRepositorio.Atualizar(escola);
-
-            return RedirectToAction("Index");
-
-        }
     }
 }

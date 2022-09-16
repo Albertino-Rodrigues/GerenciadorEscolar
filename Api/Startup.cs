@@ -30,7 +30,7 @@ namespace WebApplication1
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
         }
 
@@ -41,7 +41,7 @@ namespace WebApplication1
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication1 v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api v1"));
             }
 
             app.UseRouting();

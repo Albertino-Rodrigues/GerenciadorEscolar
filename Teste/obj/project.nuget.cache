@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "KPSPuVqPPnIPcDT93yD3/W6TYZzq7aMtfRQwUpWWAVWzreK4zzJm0Gz8rvgZ9AMljU4inzepS7OhLqqMPU7pSg==",
-  "success": false,
+  "dgSpecHash": "JJufsVwUyB1m03KosvPJKb5l0YDMSdS29qTquq2uXuXlM7SpQMUsH8GMmsW4mE+MnldZowSRs2kpx7ljMuw0dA==",
+  "success": true,
   "projectFilePath": "C:\\Users\\Yi Suchong\\source\\Backup\\Teste\\Teste\\Teste.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yi Suchong\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
@@ -113,15 +113,5 @@
     "C:\\Users\\Yi Suchong\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Yi Suchong\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Ciclo detectado. \r\n  Teste -> Api -> Teste.",
-      "libraryId": "Teste",
-      "targetGraphs": [
-        "net5.0"
-      ]
-    }
-  ]
+  "logs": []
 }

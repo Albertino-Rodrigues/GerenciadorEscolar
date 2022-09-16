@@ -1,0 +1,7 @@
+C:\Users\Yi Suchong\source\Backup\Teste\Api\obj\Debug\net5.0\Api.csproj.AssemblyReference.cache
+C:\Users\Yi Suchong\source\Backup\Teste\Api\obj\Debug\net5.0\Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yi Suchong\source\Backup\Teste\Api\obj\Debug\net5.0\Api.AssemblyInfoInputs.cache
+C:\Users\Yi Suchong\source\Backup\Teste\Api\obj\Debug\net5.0\Api.AssemblyInfo.cs
+C:\Users\Yi Suchong\source\Backup\Teste\Api\obj\Debug\net5.0\Api.csproj.CoreCompileInputs.cache
+C:\Users\Yi Suchong\source\Backup\Teste\Api\obj\Debug\net5.0\Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Yi Suchong\source\Backup\Teste\Api\obj\Debug\net5.0\Api.MvcApplicationPartsAssemblyInfo.cache

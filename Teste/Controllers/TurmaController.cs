@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Teste.Models;
-using Api.Repositorio;
+using Biblioteca.Models;
+using Biblioteca.Repositorio;
 
-namespace Teste.Controllers
+namespace Biblioteca.Controllers
 {
     public class TurmaController : Controller
     {
@@ -18,29 +18,11 @@ namespace Teste.Controllers
             return View(turmas);
         }
 
+        [HttpGet]
         public IActionResult Adicionar()
         {
             return View();
         }
-
-        public IActionResult Editar(int id)
-        {
-            TurmaModel turma = _turmaRepositorio.ListarPorId(id);
-            return View(turma);
-        }
-
-        public IActionResult ExcluirConfirmacao(int id)
-        {
-           TurmaModel turma = _turmaRepositorio.ListarPorId(id);
-            return View(turma);
-        }
-
-        public IActionResult Excluir(int id)
-        {
-            _turmaRepositorio.Excluir(id);
-            return RedirectToAction("Index");
-        }
-
 
         [HttpPost]
         public IActionResult Adicionar(TurmaModel turma)
@@ -52,8 +34,15 @@ namespace Teste.Controllers
                 return RedirectToAction("Index");
             }
             return View(turma);
-
         }
+
+        [HttpGet]
+        public IActionResult Editar(int id)
+        {
+            TurmaModel turma = _turmaRepositorio.ListarPorId(id);
+            return View(turma);
+        }
+
         [HttpPost]
         public IActionResult Editar(TurmaModel turma)
         {
@@ -62,5 +51,21 @@ namespace Teste.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpGet]
+        public IActionResult ExcluirConfirmacao(int id)
+        {
+           TurmaModel turma = _turmaRepositorio.ListarPorId(id);
+            return View(turma);
+        }
+
+        [HttpGet]
+        public IActionResult Excluir(int id)
+        {
+            _turmaRepositorio.Excluir(id);
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

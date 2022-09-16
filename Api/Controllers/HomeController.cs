@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using Teste.Models;
+using Biblioteca.Models;
 
-namespace Teste.Controllers
+namespace Api.Controllers
 {
     public class HomeController : Controller
     {

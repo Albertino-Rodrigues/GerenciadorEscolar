@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Teste.Models;
-using Teste.Repositorio;
+using Api.Repositorio;
+using Biblioteca.Models;
 
-namespace Teste.Controllers
+namespace Api.Controllers
 {
     public class TurmaController : Controller
     {

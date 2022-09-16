@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Biblioteca.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Teste.Models;
-using Teste.Repositorio;
+using Biblioteca.Repositorio;
 
-namespace Teste.Controllers
+namespace Api.Controllers
 {
     public class EscolaController : Controller
     {
@@ -47,9 +47,9 @@ namespace Teste.Controllers
         {
             if (ModelState.IsValid)
             {
-            _escolaRepositorio.Adicionar(escola);
+                _escolaRepositorio.Adicionar(escola);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             return View(escola);
 

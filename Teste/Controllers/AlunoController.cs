@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Teste.Models;
-using Api.Repositorio;
+using Biblioteca.Models;
+using Biblioteca.Repositorio;
 
-namespace Teste.Controllers
+namespace Biblioteca.Controllers
 {
     public class AlunoController : Controller
     {
@@ -17,30 +17,12 @@ namespace Teste.Controllers
             List<AlunoModel> alunos = _alunoRepositorio.BuscarTodos();
             return View(alunos);
         }
-        
+
+        [HttpGet]
         public IActionResult Adicionar()
         {
             return View();
         }
-
-        public IActionResult Editar(int id)
-        {
-            AlunoModel aluno = _alunoRepositorio.ListarPorId(id);
-            return View(aluno);
-        }
-
-        public IActionResult ExcluirConfirmacao(int id)
-        {
-            AlunoModel aluno = _alunoRepositorio.ListarPorId(id);
-            return View(aluno);
-        }
-
-        public IActionResult Excluir(int id)
-        {
-            _alunoRepositorio.Excluir(id);
-            return RedirectToAction("Index");
-        }
-
 
         [HttpPost]
         public IActionResult Adicionar(AlunoModel aluno)
@@ -54,6 +36,15 @@ namespace Teste.Controllers
             return View(aluno);
 
         }
+
+
+        [HttpGet]
+        public IActionResult Editar(int id)
+        {
+            AlunoModel aluno = _alunoRepositorio.ListarPorId(id);
+            return View(aluno);
+        }
+
         [HttpPost]
         public IActionResult Editar(AlunoModel aluno)
         {
@@ -62,6 +53,24 @@ namespace Teste.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpGet]
+        public IActionResult ExcluirConfirmacao(int id)
+        {
+            AlunoModel aluno = _alunoRepositorio.ListarPorId(id);
+            return View(aluno);
+        }
+
+        [HttpGet]
+        public IActionResult Excluir(int id)
+        {
+            _alunoRepositorio.Excluir(id);
+            return RedirectToAction("Index");
+        }
+
+
+
+
 
     }
 }

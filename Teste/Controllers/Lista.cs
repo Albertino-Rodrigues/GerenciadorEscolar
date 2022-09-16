@@ -1,4 +1,4 @@
-﻿namespace Teste.Controllers
+﻿namespace Biblioteca.Controllers
 {
     internal class Lista<T>
     {

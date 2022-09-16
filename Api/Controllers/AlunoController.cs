@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Teste.Models;
-using Teste.Repositorio;
+using Biblioteca.Models;
+using Biblioteca.Repositorio;
 
-
-namespace Teste.Controllers
+namespace Api.Controllers
 {
 
     [Route("api/[controller]")]
@@ -21,7 +20,7 @@ namespace Teste.Controllers
             List<AlunoModel> alunos = _alunoRepositorio.BuscarTodos();
             return View(alunos);
         }
-        
+
         public IActionResult Adicionar()
         {
             return View();
