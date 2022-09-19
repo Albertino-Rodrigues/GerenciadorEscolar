@@ -1,8 +1,0 @@
-C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\netcoreapp3.1\Teste.csproj.AssemblyReference.cache
-C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\netcoreapp3.1\Teste.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\netcoreapp3.1\Teste.AssemblyInfoInputs.cache
-C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\netcoreapp3.1\Teste.AssemblyInfo.cs
-C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\netcoreapp3.1\Teste.csproj.CoreCompileInputs.cache
-C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\netcoreapp3.1\Teste.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\netcoreapp3.1\Teste.RazorAssemblyInfo.cache
-C:\Users\Yi Suchong\source\repos\Teste\Teste\obj\Debug\netcoreapp3.1\Teste.RazorAssemblyInfo.cs
