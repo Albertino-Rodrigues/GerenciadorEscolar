@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Biblioteca.Models;
 using Biblioteca.Repositorio;
 
-namespace Biblioteca.Controllers
+namespace Teste.Controllers
 {
     public class TurmaController : Controller
     {

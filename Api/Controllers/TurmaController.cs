@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿/*using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Api.Repositorio;
 using Biblioteca.Models;
+using Biblioteca.Repositorio;
 
 namespace Api.Controllers
 {
+   /* [Route("api/[controller]")]
+    [ApiController]
     public class TurmaController : Controller
     {
         private readonly ITurmaRepositorio _turmaRepositorio;
@@ -18,6 +20,7 @@ namespace Api.Controllers
             return View(turmas);
         }
 
+        [HttpGet]
         public IActionResult Adicionar()
         {
             return View();
@@ -64,3 +67,4 @@ namespace Api.Controllers
         }
     }
 }
+*/

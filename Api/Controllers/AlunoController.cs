@@ -15,6 +15,8 @@ namespace Api.Controllers
         {
             _alunoRepositorio = alunoRepositorio;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             List<AlunoModel> alunos = _alunoRepositorio.BuscarTodos();

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Biblioteca.Repositorio;
 using Biblioteca.Data;
 
-namespace Biblioteca
+namespace Teste 
 {
     public class Startup
     {

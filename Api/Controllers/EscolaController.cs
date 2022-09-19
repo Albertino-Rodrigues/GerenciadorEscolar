@@ -1,4 +1,4 @@
-﻿using Biblioteca.Models;
+﻿/*using Biblioteca.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Biblioteca.Repositorio;
@@ -63,4 +63,4 @@ namespace Api.Controllers
 
         }
     }
-}
+}*/

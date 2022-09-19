@@ -2,8 +2,9 @@
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using Biblioteca.Models;
+using Teste.Models;
 
-namespace Biblioteca.Controllers
+namespace Teste.Controllers
 {
     public class HomeController : Controller
     {
