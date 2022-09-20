@@ -1,5 +1,8 @@
+using Biblioteca.Data;
+using Biblioteca.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +14,8 @@ namespace Api
 {
     public class Startup
     {
+ 
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,7 +31,15 @@ namespace Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
+               
             });
+            
+            services.AddControllersWithViews();
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<BancoContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
+            services.AddScoped<IEscolaRepositorio, EscolaRepositorio>();
+            services.AddScoped<ITurmaRepositorio, TurmaRepositorio>();
+            services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

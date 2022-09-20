@@ -1,10 +1,12 @@
-﻿/*using Biblioteca.Models;
+﻿using Biblioteca.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Biblioteca.Repositorio;
 
 namespace Api.Controllers
 {
+    [Route("api/[controller]/[action]")]
+    [ApiController]
     public class EscolaController : Controller
     {
         private readonly IEscolaRepositorio _escolaRepositorio;
@@ -12,37 +14,21 @@ namespace Api.Controllers
         {
             _escolaRepositorio = escolaRepositorio;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             List<EscolaModel> escolas = _escolaRepositorio.BuscarTodos();
             return View(escolas);
         }
 
+        [HttpGet("{id}")]
         public IActionResult Adicionar()
         {
             return View();
         }
 
-        public IActionResult Editar(int id)
-        {
-            EscolaModel escola = _escolaRepositorio.ListarPorId(id);
-            return View(escola);
-        }
-
-        public IActionResult ExcluirConfirmacao(int id)
-        {
-            EscolaModel escola = _escolaRepositorio.ListarPorId(id);
-            return View(escola);
-        }
-
-        public IActionResult Excluir(int id)
-        {
-            _escolaRepositorio.Excluir(id);
-            return RedirectToAction("Index");
-        }
-
-
-        [HttpPost]
+        [HttpPost("{id}")]
         public IActionResult Adicionar(EscolaModel escola)
         {
             if (ModelState.IsValid)
@@ -54,7 +40,16 @@ namespace Api.Controllers
             return View(escola);
 
         }
-        [HttpPost]
+
+        [HttpGet("{id}")]
+        public IActionResult Editar(int id)
+        {
+            EscolaModel escola = _escolaRepositorio.ListarPorId(id);
+            return View(escola);
+        }
+
+
+        [HttpPost("{id}")]
         public IActionResult Editar(EscolaModel escola)
         {
             _escolaRepositorio.Atualizar(escola);
@@ -62,5 +57,20 @@ namespace Api.Controllers
             return RedirectToAction("Index");
 
         }
+
+        [HttpGet("{id}")]
+        public IActionResult ExcluirConfirmacao(int id)
+        {
+            EscolaModel escola = _escolaRepositorio.ListarPorId(id);
+            return View(escola);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Excluir(int id)
+        {
+            _escolaRepositorio.Excluir(id);
+            return RedirectToAction("Index");
+        }
+
     }
-}*/
+}

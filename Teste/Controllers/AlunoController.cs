@@ -61,7 +61,7 @@ namespace Teste.Controllers
             return View(aluno);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Excluir(int id)
         {
             _alunoRepositorio.Excluir(id);
