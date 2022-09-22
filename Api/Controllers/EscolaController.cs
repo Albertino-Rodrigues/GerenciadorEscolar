@@ -2,12 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Biblioteca.Repositorio;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class EscolaController : Controller
+    public class EscolaController : ControllerBase
     {
         private readonly IEscolaRepositorio _escolaRepositorio;
         public EscolaController(IEscolaRepositorio escolaRepositorio)
@@ -15,62 +19,99 @@ namespace Api.Controllers
             _escolaRepositorio = escolaRepositorio;
         }
 
+
         [HttpGet]
-        public IActionResult Index()
+        public ActionResult<IEnumerable<EscolaModel>> GetResult()
         {
-            List<EscolaModel> escolas = _escolaRepositorio.BuscarTodos();
-            return View(escolas);
+
+            try
+            {
+                return _escolaRepositorio.BuscarTodos();
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
+
+            }
+
         }
 
         [HttpGet("{id}")]
-        public IActionResult Adicionar()
+        public ActionResult<EscolaModel> GetResult(int id)
         {
-            return View();
+            try
+            {
+                var escola = _escolaRepositorio.ListarPorId(id);
+
+                return escola;
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}");
+            }
         }
 
-        [HttpPost("{id}")]
-        public IActionResult Adicionar(EscolaModel escola)
+        [HttpPut("{id}")]
+        public ActionResult PutResult(int id, EscolaModel escola)
         {
-            if (ModelState.IsValid)
+
+            try
+            {
+                _escolaRepositorio.Atualizar(escola);
+
+                _escolaRepositorio.SaveChanges();
+
+                return Ok($"{escola.Nome} atualizada com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}");
+            }
+
+
+        }
+
+        [HttpPost]
+        public ActionResult<EscolaModel> PostResult(EscolaModel escola)
+        {
+            try
             {
                 _escolaRepositorio.Adicionar(escola);
+                _escolaRepositorio.SaveChanges();
 
-                return RedirectToAction("Index");
+                return CreatedAtAction("GetResult", new { id = escola.Id }, escola);
+
+
             }
-            return View(escola);
-
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult Editar(int id)
-        {
-            EscolaModel escola = _escolaRepositorio.ListarPorId(id);
-            return View(escola);
-        }
-
-
-        [HttpPost("{id}")]
-        public IActionResult Editar(EscolaModel escola)
-        {
-            _escolaRepositorio.Atualizar(escola);
-
-            return RedirectToAction("Index");
-
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult ExcluirConfirmacao(int id)
-        {
-            EscolaModel escola = _escolaRepositorio.ListarPorId(id);
-            return View(escola);
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro:{ex.Message}.");
+            }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Excluir(int id)
+        public ActionResult<EscolaModel> DeleteResult(int id)
         {
-            _escolaRepositorio.Excluir(id);
-            return RedirectToAction("Index");
+
+            try
+            {
+                _escolaRepositorio.Excluir(id);
+
+                var escola = _escolaRepositorio.ListarPorId(id);
+
+                _escolaRepositorio.SaveChanges();
+
+                return Ok($"{escola.Nome} deletada.");
+
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
+            }
         }
 
+
     }
+
+
 }

@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using Biblioteca.Models;
 using Biblioteca.Repositorio;
+using System;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
 
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class AlunoController : Controller
+    public class AlunoController : ControllerBase
     {
         private readonly IAlunoRepositorio _alunoRepositorio;
 
@@ -17,62 +20,96 @@ namespace Api.Controllers
             _alunoRepositorio = alunoRepositorio;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Index()
+        [HttpGet]
+        public ActionResult<IEnumerable<AlunoModel>> GetResult()
         {
-            List<AlunoModel> alunos = _alunoRepositorio.BuscarTodos();
-            return View(alunos);
+
+            try
+            {
+                return _alunoRepositorio.BuscarTodos();
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
+
+            }
+
         }
 
         [HttpGet("{id}")]
-        public IActionResult Adicionar()
+        public ActionResult<AlunoModel> GetResult(int id)
         {
-            return View();
+            try
+            {
+                var aluno = _alunoRepositorio.ListarPorId(id);
+
+                return aluno;
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}");
+            }
         }
 
-        [HttpPost("{id}")]
-        public IActionResult Adicionar(AlunoModel aluno)
+        [HttpPut("{id}")]
+        public ActionResult PutResult(int id, AlunoModel aluno)
         {
-            if (ModelState.IsValid)
+
+            try
+            {
+                _alunoRepositorio.Atualizar(aluno);
+
+                _alunoRepositorio.SaveChanges();
+
+                return Ok($"{aluno.Nome} atualizado.");
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}");
+            }
+
+
+        }
+
+        [HttpPost]
+        public ActionResult<AlunoModel> PostResult(AlunoModel aluno)
+        {
+            try
             {
                 _alunoRepositorio.Adicionar(aluno);
+                _alunoRepositorio.SaveChanges();
 
-                return RedirectToAction("Index");
+                return CreatedAtAction("GetResult", new { id = aluno.Id }, aluno);
+
+
             }
-            return View(aluno);
-
-        }
-
-
-        [HttpGet("{id}")]
-        public IActionResult Editar(int id)
-        {
-            AlunoModel aluno = _alunoRepositorio.ListarPorId(id);
-            return View(aluno);
-        }
-
-        [HttpPost("{id}")]
-        public IActionResult Editar(AlunoModel aluno)
-        {
-            _alunoRepositorio.Atualizar(aluno);
-
-            return RedirectToAction("Index");
-
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult ExcluirConfirmacao(int id)
-        {
-            AlunoModel aluno = _alunoRepositorio.ListarPorId(id);
-            return View(aluno);
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro:{ex.Message}.");
+            }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Excluir(int id)
+        public ActionResult<AlunoModel> DeleteResult(int id)
         {
-            _alunoRepositorio.Excluir(id);
-            return RedirectToAction("Index");
+
+            try
+            {            
+                
+                var aluno = _alunoRepositorio.ListarPorId(id);
+                _alunoRepositorio.Excluir(id);
+ 
+                _alunoRepositorio.SaveChanges();
+
+                return Ok($"{aluno.Nome} deletado.");
+
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
+            }
         }
+
 
 
     }

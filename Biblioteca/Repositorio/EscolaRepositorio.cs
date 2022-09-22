@@ -20,7 +20,7 @@ namespace Biblioteca.Repositorio
         {
             if (escola == null)
             {
-                throw new System.Exception("Houve um erro !");   
+                throw new Exception("Houve um erro !");   
 
                 
             }
@@ -49,7 +49,7 @@ namespace Biblioteca.Repositorio
 
             if (escolaDB == null)
             {
-                throw new System.Exception("Houve um erro na atualização do contato!");
+                throw new Exception("Houve um erro na atualização do cadastro");
             }
 
             escolaDB.Nome = escola.Nome;
@@ -67,7 +67,7 @@ namespace Biblioteca.Repositorio
         {
             EscolaModel escolaDB = ListarPorId(id);
 
-            if (escolaDB == null) throw new System.Exception("Houve um erro ao tentar excluir o cadastro!");
+            if (escolaDB == null) throw new Exception("Houve um erro ao tentar excluir o cadastro!");
                           
                 _context.Escolas.Remove(escolaDB);
                 _context.SaveChanges();
@@ -76,6 +76,9 @@ namespace Biblioteca.Repositorio
             
         }
 
-
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() > 0);
+        }
     }   
 }

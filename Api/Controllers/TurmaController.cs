@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using Biblioteca.Models;
 using Biblioteca.Repositorio;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class TurmaController : Controller
+    public class TurmaController : ControllerBase
     {
         private readonly ITurmaRepositorio _turmaRepositorio;
         public TurmaController(ITurmaRepositorio turmaRepositorio)
@@ -15,59 +17,94 @@ namespace Api.Controllers
             _turmaRepositorio = turmaRepositorio;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Index()
+        [HttpGet]
+        public ActionResult<IEnumerable<TurmaModel>> GetResult()
         {
-            List<TurmaModel> turmas = _turmaRepositorio.BuscarTodos();
-            return View(turmas);
+
+            try
+            {
+                return _turmaRepositorio.BuscarTodos();
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
+
+            }
+
         }
 
         [HttpGet("{id}")]
-        public IActionResult Adicionar()
+        public ActionResult<TurmaModel> GetResult(int id)
         {
-            return View();
+            try
+            {
+                var turma = _turmaRepositorio.ListarPorId(id);
+
+                return turma;
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}");
+            }
         }
 
-        [HttpPost("{id}")]
-        public IActionResult Adicionar(TurmaModel turma)
+        [HttpPut("{id}")]
+        public ActionResult PutResult(int id, TurmaModel turma)
         {
-            if (ModelState.IsValid)
+
+            try
+            {
+                _turmaRepositorio.Atualizar(turma);
+
+                _turmaRepositorio.SaveChanges();
+
+                return Ok($"{turma.Descricao} atualizada com sucesso.");
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}");
+            }
+
+
+        }
+
+        [HttpPost]
+        public ActionResult<TurmaModel> PostResult(TurmaModel turma)
+        {
+            try
             {
                 _turmaRepositorio.Adicionar(turma);
+                _turmaRepositorio.SaveChanges();
 
-                return RedirectToAction("Index");
+                return CreatedAtAction("GetResult", new { id = turma.Id }, turma);
+
+
             }
-            return View(turma);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult Editar(int id)
-        {
-            TurmaModel turma = _turmaRepositorio.ListarPorId(id);
-            return View(turma);
-        }
-
-        [HttpPost("{id}")]
-        public IActionResult Editar(TurmaModel turma)
-        {
-            _turmaRepositorio.Atualizar(turma);
-
-            return RedirectToAction("Index");
-
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult ExcluirConfirmacao(int id)
-        {
-            TurmaModel turma = _turmaRepositorio.ListarPorId(id);
-            return View(turma);
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro:{ex.Message}.");
+            }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Excluir(int id)
+        public ActionResult<TurmaModel> DeleteResult(int id)
         {
-            _turmaRepositorio.Excluir(id);
-            return RedirectToAction("Index");
+
+            try
+            {
+                _turmaRepositorio.Excluir(id);
+
+                var turma = _turmaRepositorio.ListarPorId(id);
+
+                _turmaRepositorio.SaveChanges();
+
+                return Ok($"{turma.Descricao} deletada.");
+
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
+            }
         }
 
 

@@ -12,5 +12,6 @@ namespace Biblioteca.Repositorio
         TurmaModel Atualizar(TurmaModel turma);
 
         bool Excluir(int id);
+        bool SaveChanges();
     }
 }

@@ -75,7 +75,10 @@ namespace Biblioteca.Repositorio
 
             }
 
-
+        public bool SaveChanges()
+        {
+            throw new System.NotImplementedException();
         }
+    }
     
 }
