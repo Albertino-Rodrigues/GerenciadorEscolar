@@ -13,7 +13,7 @@ namespace Biblioteca.Repositorio
 
         bool SaveChanges();
 
-        bool Excluir(int id);
+        void Excluir(int id);
         
     }
 }

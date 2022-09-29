@@ -19,7 +19,7 @@ namespace Biblioteca.Repositorio
             {
                 if (turma == null)
                 {
-                    throw new System.Exception("Houve um erro !");
+                    throw new System.Exception("Houve um erro!");
 
 
                 }
@@ -77,7 +77,7 @@ namespace Biblioteca.Repositorio
 
         public bool SaveChanges()
         {
-            throw new System.NotImplementedException();
+            return (_context.SaveChanges() > 0);
         }
     }
     

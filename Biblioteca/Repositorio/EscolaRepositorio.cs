@@ -4,13 +4,20 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Biblioteca.Models;
+using Newtonsoft.Json;
+using System.Security.Policy;
+using System.Net.Http;
+using System.Net;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace Biblioteca.Repositorio
 {
     public class EscolaRepositorio : IEscolaRepositorio
     {
+        HttpClient client = new HttpClient();
+
         private readonly BancoContext _context;
-        
 
         public EscolaRepositorio(BancoContext bancoContext)
         {
@@ -18,22 +25,24 @@ namespace Biblioteca.Repositorio
         }
         public EscolaModel Adicionar(EscolaModel escola)
         {
+
             if (escola == null)
             {
-                throw new Exception("Houve um erro !");   
 
-                
+                throw new Exception("Houve um erro !");   
+              
             }
+
                 _context.Escolas.Add(escola);
                 _context.SaveChanges();
 
                 return escola;
-
-
+         
         }
 
         public EscolaModel ListarPorId(int id)
         {
+
             return _context.Escolas.FirstOrDefault(x => x.Id == id);
         }
 
@@ -63,16 +72,14 @@ namespace Biblioteca.Repositorio
             return escola;
         }
 
-        public bool Excluir(int id)
+        public void Excluir(int id)
         {
-            EscolaModel escolaDB = ListarPorId(id);
-
-            if (escolaDB == null) throw new Exception("Houve um erro ao tentar excluir o cadastro!");
-                          
+            var escolaDB = ListarPorId(id);
+                       
                 _context.Escolas.Remove(escolaDB);
                 _context.SaveChanges();
 
-                return true;
+
             
         }
 

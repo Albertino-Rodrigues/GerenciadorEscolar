@@ -1,24 +1,24 @@
 ﻿using Biblioteca.Models;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Biblioteca.Repositorio;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/escola")]
     [ApiController]
+
     public class EscolaController : ControllerBase
     {
+
         private readonly IEscolaRepositorio _escolaRepositorio;
         public EscolaController(IEscolaRepositorio escolaRepositorio)
         {
             _escolaRepositorio = escolaRepositorio;
         }
-
 
         [HttpGet]
         public ActionResult<IEnumerable<EscolaModel>> GetResult()
@@ -26,11 +26,13 @@ namespace Api.Controllers
 
             try
             {
-                return _escolaRepositorio.BuscarTodos();
+
+               return _escolaRepositorio.BuscarTodos();
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                  $"Houve um erro: {ex.Message}.");
 
             }
 
@@ -39,8 +41,9 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public ActionResult<EscolaModel> GetResult(int id)
         {
+
             try
-            {
+            {             
                 var escola = _escolaRepositorio.ListarPorId(id);
 
                 return escola;
@@ -61,7 +64,7 @@ namespace Api.Controllers
 
                 _escolaRepositorio.SaveChanges();
 
-                return Ok($"{escola.Nome} atualizada com sucesso.");
+                return Ok($"Os dados da {escola.Nome} foram atualizados.");
             }
             catch (Exception ex)
             {
@@ -79,12 +82,12 @@ namespace Api.Controllers
                 _escolaRepositorio.Adicionar(escola);
                 _escolaRepositorio.SaveChanges();
 
-                return CreatedAtAction("GetResult", new { id = escola.Id }, escola);
+                return Ok($"A {escola.Nome} foi adicionada.");
 
 
             }
             catch (Exception ex)
-            {
+            { 
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro:{ex.Message}.");
             }
         }
@@ -101,7 +104,7 @@ namespace Api.Controllers
 
                 _escolaRepositorio.SaveChanges();
 
-                return Ok($"{escola.Nome} deletada.");
+                return Ok($"A {escola.Nome} foi deletada.");
 
             }
             catch (Exception ex)

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+
 namespace Biblioteca.Models
 {
 	public class EscolaModel
@@ -7,8 +8,10 @@ namespace Biblioteca.Models
 		public int Id { get; set; }
 
 		[Required(ErrorMessage = "Campo obrigatório")]
-		public string Nome { get; set; }
 
+		public string Nome { get; set; }
+        [Required(ErrorMessage = "Campo obrigatório")]
+        
 		public int Inep { get; set; }
 
 		[Required(ErrorMessage = "Campo obrigatório")]

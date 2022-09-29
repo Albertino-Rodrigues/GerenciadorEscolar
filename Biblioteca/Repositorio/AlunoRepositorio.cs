@@ -7,6 +7,7 @@ namespace Biblioteca.Repositorio
 {
     public class AlunoRepositorio : IAlunoRepositorio
     {
+
         private readonly BancoContext _context;
 
 
@@ -76,7 +77,7 @@ namespace Biblioteca.Repositorio
 
         public bool SaveChanges()
         {
-            throw new System.NotImplementedException();
+            return (_context.SaveChanges() > 0);
         }
     }
 }

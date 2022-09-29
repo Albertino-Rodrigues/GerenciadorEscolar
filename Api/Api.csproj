@@ -29,7 +29,7 @@
 
 
 	<ProjectExtensions>
-		<VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="https://cdn.jsdelivr.net/gh/roadrunner-server/roadrunner@latest/schemas/config/2.0.schema.json" /></VisualStudio>
+		<VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="https://json.schemastore.org/launchsettings.json" /></VisualStudio>
 	</ProjectExtensions>
 
 </Project>

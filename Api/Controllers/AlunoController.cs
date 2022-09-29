@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Api.Controllers
 {
 
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AlunoController : ControllerBase
     {
@@ -61,7 +61,7 @@ namespace Api.Controllers
 
                 _alunoRepositorio.SaveChanges();
 
-                return Ok($"{aluno.Nome} atualizado.");
+                return Ok($" Cadastro do {aluno.Nome} atualizado.");
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@ namespace Api.Controllers
  
                 _alunoRepositorio.SaveChanges();
 
-                return Ok($"{aluno.Nome} deletado.");
+                return Ok($"Cadastro do {aluno.Nome} deletado.");
 
             }
             catch (Exception ex)
