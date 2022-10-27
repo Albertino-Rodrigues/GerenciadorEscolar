@@ -15,8 +15,7 @@ namespace Biblioteca.Repositorio
 {
     public class EscolaRepositorio : IEscolaRepositorio
     {
-        HttpClient client = new HttpClient();
-
+  
         private readonly BancoContext _context;
 
         public EscolaRepositorio(BancoContext bancoContext)
@@ -29,7 +28,7 @@ namespace Biblioteca.Repositorio
             if (escola == null)
             {
 
-                throw new Exception("Houve um erro !");   
+                throw new Exception("Houve um erro ao adicionar!");   
               
             }
 
@@ -77,15 +76,12 @@ namespace Biblioteca.Repositorio
             var escolaDB = ListarPorId(id);
                        
                 _context.Escolas.Remove(escolaDB);
-                _context.SaveChanges();
-
-
             
         }
 
-        public bool SaveChanges()
+        public int? SaveChanges()
         {
-            return (_context.SaveChanges() > 0);
+            return _context.SaveChanges();
         }
     }   
 }

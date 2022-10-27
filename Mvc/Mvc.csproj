@@ -6,13 +6,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Include="Views\Home\Index.cshtml" />
-	  <None Include="Views\Home\Privacy.cshtml" />
-	  <None Include="Views\Shared\Error.cshtml" />
-	  <None Include="Views\Shared\_Layout.cshtml" />
-	  <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-	  <None Include="Views\_ViewImports.cshtml" />
-	  <None Include="Views\_ViewStart.cshtml" />
+		<None Include="Views\Home\Index.cshtml" />
+		<None Include="Views\Home\Privacy.cshtml" />
+		<None Include="Views\Shared\Error.cshtml" />
+		<None Include="Views\Shared\_Layout.cshtml" />
+		<None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+		<None Include="Views\_ViewImports.cshtml" />
+		<None Include="Views\_ViewStart.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -34,6 +34,10 @@
 		</PackageReference>
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties appsettings_1json__JsonSchema="" properties_4launchsettings_1json__JsonSchema="" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

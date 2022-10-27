@@ -28,7 +28,7 @@
         <input type="number" asp-for="DataNasc" class="form-control" placeholder="Digite a data de nascimento">
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Alterar</button>
+    <button type="submit" class="btn btn-primary btn-block" asp-action="ConfirmarEditar" asp-controller="Aluno" asp-route-id="@Model">Alterar</button>
     <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="Aluno" role="button">Voltar</a>
 
 </form>

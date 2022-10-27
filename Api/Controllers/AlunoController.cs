@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Api.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Route("api/aluno")]
     [ApiController]
     public class AlunoController : ControllerBase
     {
@@ -26,11 +26,14 @@ namespace Api.Controllers
 
             try
             {
-                return _alunoRepositorio.BuscarTodos();
+
+                var aluno = _alunoRepositorio.BuscarTodos();
+                return Ok(aluno);
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                  $"Houve um erro: {ex.Message}.");
 
             }
 
@@ -39,11 +42,12 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public ActionResult<AlunoModel> GetResult(int id)
         {
+
             try
             {
                 var aluno = _alunoRepositorio.ListarPorId(id);
 
-                return aluno;
+                return Ok(aluno);
             }
             catch (Exception ex)
             {
@@ -52,16 +56,17 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult PutResult(int id, AlunoModel aluno)
+        public ActionResult PutResult(int id, AlunoModel alunoModel)
         {
-
             try
             {
-                _alunoRepositorio.Atualizar(aluno);
+                _alunoRepositorio.Atualizar(alunoModel);
 
                 _alunoRepositorio.SaveChanges();
 
-                return Ok($" Cadastro do {aluno.Nome} atualizado.");
+                var lstAluno = _alunoRepositorio.BuscarTodos();
+
+                return Ok(lstAluno);
             }
             catch (Exception ex)
             {
@@ -79,7 +84,9 @@ namespace Api.Controllers
                 _alunoRepositorio.Adicionar(aluno);
                 _alunoRepositorio.SaveChanges();
 
-                return CreatedAtAction("GetResult", new { id = aluno.Id }, aluno);
+                var lstAluno = _alunoRepositorio.BuscarTodos();
+
+                return Ok(lstAluno);
 
 
             }
@@ -94,14 +101,14 @@ namespace Api.Controllers
         {
 
             try
-            {            
-                
-                var aluno = _alunoRepositorio.ListarPorId(id);
+            {
                 _alunoRepositorio.Excluir(id);
- 
+
+                var aluno = _alunoRepositorio.ListarPorId(id);
+
                 _alunoRepositorio.SaveChanges();
 
-                return Ok($"Cadastro do {aluno.Nome} deletado.");
+                return Ok(aluno);
 
             }
             catch (Exception ex)
@@ -109,9 +116,8 @@ namespace Api.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
             }
         }
-
-
-
     }
 
 }
+
+

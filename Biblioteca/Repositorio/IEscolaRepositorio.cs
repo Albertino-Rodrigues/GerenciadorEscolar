@@ -11,7 +11,7 @@ namespace Biblioteca.Repositorio
 
         EscolaModel Atualizar(EscolaModel escola);
 
-        bool SaveChanges();
+        int? SaveChanges();
 
         void Excluir(int id);
         

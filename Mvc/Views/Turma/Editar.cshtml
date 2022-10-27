@@ -28,7 +28,7 @@
         <input type="text" asp-for="AnoEscolar" class="form-control" placeholder="Digite o ano escolar">
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block">Alterar</button>
+    <button type="submit" class="btn btn-primary btn-block" asp-action="ConfirmarEditar" asp-controller="Turma" asp-route-id="@Model">Alterar</button>
     <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="Turma" role="button">Voltar</a>
 
 </form>

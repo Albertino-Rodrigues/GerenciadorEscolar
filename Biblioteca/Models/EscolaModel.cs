@@ -10,7 +10,7 @@ namespace Biblioteca.Models
 		[Required(ErrorMessage = "Campo obrigatório")]
 
 		public string Nome { get; set; }
-        [Required(ErrorMessage = "Campo obrigatório")]
+        //[Required(ErrorMessage = "Campo obrigatório")]
         
 		public int Inep { get; set; }
 

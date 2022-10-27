@@ -27,7 +27,8 @@ namespace Api.Controllers
             try
             {
 
-               return _escolaRepositorio.BuscarTodos();
+               var escola = _escolaRepositorio.BuscarTodos();
+                return Ok(escola);
             }
             catch (Exception ex)
             {
@@ -46,7 +47,7 @@ namespace Api.Controllers
             {             
                 var escola = _escolaRepositorio.ListarPorId(id);
 
-                return escola;
+                return Ok(escola);
             }
             catch (Exception ex)
             {
@@ -55,16 +56,17 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult PutResult(int id, EscolaModel escola)
+        public ActionResult PutResult(int id,  EscolaModel escolaModel)
         {
-
             try
             {
-                _escolaRepositorio.Atualizar(escola);
+                _escolaRepositorio.Atualizar(escolaModel);
 
                 _escolaRepositorio.SaveChanges();
 
-                return Ok($"Os dados da {escola.Nome} foram atualizados.");
+                var lstEscola = _escolaRepositorio.BuscarTodos();
+
+                return Ok(lstEscola);
             }
             catch (Exception ex)
             {
@@ -82,7 +84,9 @@ namespace Api.Controllers
                 _escolaRepositorio.Adicionar(escola);
                 _escolaRepositorio.SaveChanges();
 
-                return Ok($"A {escola.Nome} foi adicionada.");
+                var lstEscola = _escolaRepositorio.BuscarTodos();
+
+                return Ok(lstEscola);
 
 
             }
@@ -104,7 +108,7 @@ namespace Api.Controllers
 
                 _escolaRepositorio.SaveChanges();
 
-                return Ok($"A {escola.Nome} foi deletada.");
+                return Ok($"{escola.Nome} excluida com sucesso.");
 
             }
             catch (Exception ex)

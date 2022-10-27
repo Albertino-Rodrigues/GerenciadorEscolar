@@ -7,6 +7,9 @@ using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections;
 
 namespace Mvc.Controllers
 {
@@ -15,130 +18,127 @@ namespace Mvc.Controllers
         HttpClient client = new HttpClient();
 
 
-       public async Task<List<EscolaModel>> IndexAsync(EscolaModel escola)
-       {
-            client.BaseAddress = new System.Uri("http://localhost:22546/api/");
+        public IActionResult Index(EscolaModel escola)
+        {
+            client.BaseAddress = new Uri("http://localhost:22546/api/");
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var escolaSerializada = JsonConvert.SerializeObject(escola);
-            var escolaContentString = new StringContent(escolaSerializada, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.GetAsync("escola");
-
-            if (response.IsSuccessStatusCode)
-            {
-                var dados = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<EscolaModel>>(dados);
-            }
-
-            return new List<EscolaModel>();
-
-       }
-
-
-        [HttpGet]
-        public IActionResult Adicionar()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<List<EscolaModel>> Adicionar(EscolaModel escola)
-        {
-
-            client.BaseAddress = new System.Uri("http://localhost:22546/api/");
-
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var escolaSerializada = JsonConvert.SerializeObject(escola);
-            var escolaContentString = new StringContent(escolaSerializada, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.PostAsync("escola", escolaContentString);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var dados = await  response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<EscolaModel>>(dados);
-
-            }
-
-            return new List<EscolaModel> { escola };
-        }
-
-        [HttpGet]
-        public async Task<List<EscolaModel>> Editar(EscolaModel escola)
-        {
-            client.BaseAddress = new System.Uri("http://localhost:22546/api/");
-
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var escolaSerializada = JsonConvert.SerializeObject(escola);
-            var escolaContentString = new StringContent(escolaSerializada, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.GetAsync("escola");
-
-            if (response.IsSuccessStatusCode)
-            {
-                var dados = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<EscolaModel>>(dados);
-            }
-
-            return new List<EscolaModel> {};
-        }
-
-        [HttpPut]
-        public void  Editar(int id)
-        {
-            client.BaseAddress = new System.Uri("http://localhost:22546/api/");
-
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var escolaSerializada = JsonConvert.SerializeObject(escola);
-            var escolaContentString = new StringContent(escolaSerializada, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response =  client.PutAsync("escola", escolaContentString).Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                var dados = response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject(response.Result);
-
-            }
-
-        }
-
-        public void ExcluirConfirmacao(int id)
-        {
-            client.BaseAddress = new System.Uri("http://localhost:22546/api/");
-
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var escolaSerializada = JsonConvert.SerializeObject(escola);
-            var escolaContentString = new StringContent(escolaSerializada, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = client.GetAsync("escola").Result;
 
             if (response.IsSuccessStatusCode)
             {
                 var dados = response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<List<EscolaModel>>(dados);
+                var retorno = JsonConvert.DeserializeObject<List<EscolaModel>>(dados.Result);
+
+                return View("Index", retorno);
             }
 
-            return new List<EscolaModel>();
+            return View("Index", response);
         }
 
-        public void Excluir(int id)
-        {
-            client.BaseAddress = new System.Uri("http://localhost:22546/api/");
-            var response = client.DeleteAsync(client.BaseAddress).Result;
 
+        [HttpGet]
+        public IActionResult Adicionar(int id)
+        {
+
+            return View("Adicionar");
+        }
+
+        [HttpPost]
+        public IActionResult Adicionar(EscolaModel escola)
+        {
+
+            client.BaseAddress = new Uri("http://localhost:22546/api/");
+
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var escolaSerializada = JsonConvert.SerializeObject(escola);
+            var escolaContentString = new StringContent(escolaSerializada, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PostAsync("escola", escolaContentString).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var dados = response.Content.ReadAsStringAsync();
+                var retorno = JsonConvert.DeserializeObject<List<EscolaModel>>(dados.Result);
+                return View("Index", retorno);
+
+            }
+
+            return View("Adicionar");
+
+        }
+
+        [HttpGet]
+        public IActionResult Editar(EscolaModel escola)
+        {
+            client.BaseAddress = new Uri("http://localhost:22546/api/escola/" + escola.Id);
+
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.GetAsync(client.BaseAddress).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var dados = response.Content.ReadAsStringAsync();
+                var retorno = JsonConvert.DeserializeObject<EscolaModel>(dados.Result);
+
+                return View("Editar", retorno);
+            }
+
+            return View("Editar");
+        }
+
+        public IActionResult ConfirmarEditar(EscolaModel escola)
+        {
+            var url = "http://localhost:22546/api/escola/" + escola.Id;
+
+            string json = JsonConvert.SerializeObject(escola, Formatting.Indented);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(json);
+            var escolaJson = new ByteArrayContent(buffer);
+            escolaJson.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
+            var response = client.PutAsync(string.Format(url), escolaJson).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", response);
+            }
+            return View("Editar");
+
+        }
+
+        [HttpGet]
+        public ActionResult<EscolaModel> ExcluirConfirmacao(EscolaModel escola)
+        {
+            client.BaseAddress = new Uri("http://localhost:22546/api/escola/" + escola.Id);
+
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var response = client.GetAsync(client.BaseAddress).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var dados = response.Content.ReadAsStringAsync();
+                var retorno = JsonConvert.DeserializeObject<EscolaModel>(dados.Result);
+
+                return View("ExcluirConfirmacao", retorno);
+            }
+
+            return View("ExcluirConfirmacao");
+        }
+        public ActionResult Excluir(int id)
+        {
+            var url = ("http://localhost:22546/api/escola/" + id);
+            var response = client.DeleteAsync(url).Result;
+
+            return RedirectToAction("Index");
         }
 
     }
+
 }

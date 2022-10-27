@@ -7,7 +7,7 @@ using System;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/turma")]
     [ApiController]
     public class TurmaController : ControllerBase
     {
@@ -23,11 +23,14 @@ namespace Api.Controllers
 
             try
             {
-                return _turmaRepositorio.BuscarTodos();
+
+                var turma = _turmaRepositorio.BuscarTodos();
+                return Ok(turma);
             }
             catch (Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Houve um erro: {ex.Message}.");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                  $"Houve um erro: {ex.Message}.");
 
             }
 
@@ -36,11 +39,12 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public ActionResult<TurmaModel> GetResult(int id)
         {
+
             try
             {
                 var turma = _turmaRepositorio.ListarPorId(id);
 
-                return turma;
+                return Ok(turma);
             }
             catch (Exception ex)
             {
@@ -49,16 +53,17 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult PutResult(int id, TurmaModel turma)
+        public ActionResult PutResult(int id, TurmaModel turmaModel)
         {
-
             try
             {
-                _turmaRepositorio.Atualizar(turma);
+                _turmaRepositorio.Atualizar(turmaModel);
 
                 _turmaRepositorio.SaveChanges();
 
-                return Ok($"{turma.Descricao} atualizada com sucesso.");
+                var lstTurma = _turmaRepositorio.BuscarTodos();
+
+                return Ok(lstTurma);
             }
             catch (Exception ex)
             {
@@ -76,7 +81,9 @@ namespace Api.Controllers
                 _turmaRepositorio.Adicionar(turma);
                 _turmaRepositorio.SaveChanges();
 
-                return CreatedAtAction("GetResult", new { id = turma.Id }, turma);
+                var lstTurma = _turmaRepositorio.BuscarTodos();
+
+                return Ok(lstTurma);
 
 
             }
@@ -98,7 +105,7 @@ namespace Api.Controllers
 
                 _turmaRepositorio.SaveChanges();
 
-                return Ok($"{turma.Descricao} deletada.");
+                return Ok(turma);
 
             }
             catch (Exception ex)
@@ -109,4 +116,8 @@ namespace Api.Controllers
 
 
     }
+
+
+
 }
+
