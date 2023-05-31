@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System;
+using System.Net.Http.Json;
 
 namespace Mvc.Controllers
 {
@@ -15,14 +16,14 @@ namespace Mvc.Controllers
     {
         HttpClient client = new HttpClient();
 
-        public IActionResult Index(TurmaModel turma)
+        public IActionResult Index(int escolaId)
         {
+            ViewBag.EscolaId = escolaId;    
             client.BaseAddress = new Uri("http://localhost:22546/api/");
-
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = client.GetAsync("turma").Result;
+            HttpResponseMessage response = client.GetAsync($"turma?escolaId={escolaId}").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -35,42 +36,46 @@ namespace Mvc.Controllers
             return View("Index", response);
         }
 
-        
+
         [HttpGet]
-        public IActionResult Adicionar()
+        public IActionResult Adicionar(int escolaId)
         {
-            return View();
+            ViewBag.EscolaId = escolaId;
+            var turmaModel = new TurmaModel() { EscolaId = escolaId };
+            return View("Adicionar", turmaModel);
         }
+
 
         [HttpPost]
         public IActionResult Adicionar(TurmaModel turma)
         {
-
+            ViewBag.EscolaId = turma.EscolaId;
             client.BaseAddress = new Uri("http://localhost:22546/api/");
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
-
             var turmaSerializada = JsonConvert.SerializeObject(turma);
             var turmaContentString = new StringContent(turmaSerializada, Encoding.UTF8, "application/json");
-
+             
             HttpResponseMessage response = client.PostAsync("turma", turmaContentString).Result;
 
             if (response.IsSuccessStatusCode)
             {
                 var dados = response.Content.ReadAsStringAsync();
                 var retorno = JsonConvert.DeserializeObject<List<TurmaModel>>(dados.Result);
-                return View("Index", retorno);
+                return RedirectToAction("Index", new { escolaId = turma.EscolaId });
 
             }
 
-            return View("Adicionar");
+            return View("Index");
 
         }
 
         [HttpGet]
         public IActionResult Editar(TurmaModel turma)
         {
+            ViewBag.EscolaId = turma.EscolaId;
+
             client.BaseAddress = new Uri("http://localhost:22546/api/turma/" + turma.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
@@ -102,7 +107,8 @@ namespace Mvc.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", response);
+                return RedirectToAction("Index", new { escolaId = turma.EscolaId });
+
             }
             return View("Editar");
 
@@ -111,6 +117,8 @@ namespace Mvc.Controllers
         [HttpGet]
         public ActionResult<TurmaModel> ExcluirConfirmacao(TurmaModel turma)
         {
+            ViewBag.EscolaId = turma.EscolaId;
+
             client.BaseAddress = new Uri("http://localhost:22546/api/turma/" + turma.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
@@ -128,12 +136,12 @@ namespace Mvc.Controllers
 
             return View("ExcluirConfirmacao");
         }
-        public ActionResult Excluir(int id)
+        public ActionResult Excluir(int id, TurmaModel turma)
         {
             var url = ("http://localhost:22546/api/turma/" + id);
             var response = client.DeleteAsync(url).Result;
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { escolaId = turma.EscolaId});
 
         }
 

@@ -40,7 +40,7 @@ namespace Mvc.Controllers
 
 
         [HttpGet]
-        public IActionResult Adicionar(int id)
+        public IActionResult Adicionar()
         {
 
             return View("Adicionar");

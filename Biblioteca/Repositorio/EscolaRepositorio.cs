@@ -51,9 +51,9 @@ namespace Biblioteca.Repositorio
             return _context.Escolas.ToList();
         }
 
-        public EscolaModel Atualizar(EscolaModel escola)
+        public EscolaModel Atualizar(int id, EscolaModel escola)
         {
-            EscolaModel escolaDB = ListarPorId(escola.Id);
+            EscolaModel escolaDB = ListarPorId(id);
 
             if (escolaDB == null)
             {
@@ -68,7 +68,7 @@ namespace Biblioteca.Repositorio
             _context.Escolas.Update(escolaDB);
             _context.SaveChanges();
 
-            return escola;
+            return escolaDB;
         }
 
         public void Excluir(int id)
@@ -79,9 +79,9 @@ namespace Biblioteca.Repositorio
             
         }
 
-        public int? SaveChanges()
+        public bool SaveChanges()
         {
-            return _context.SaveChanges();
+            return (_context.SaveChanges() > 0);
         }
     }   
 }

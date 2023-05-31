@@ -18,13 +18,13 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<TurmaModel>> GetResult()
+        public ActionResult<IEnumerable<TurmaModel>> GetResult(int escolaId)
         {
 
             try
             {
-
-                var turma = _turmaRepositorio.BuscarTodos();
+                
+                var turma = _turmaRepositorio.BuscarTodos(escolaId);
                 return Ok(turma);
             }
             catch (Exception ex)
@@ -37,7 +37,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<TurmaModel> GetResult(int id)
+        public ActionResult<TurmaModel> GetResultPorId(int id)
         {
 
             try
@@ -53,15 +53,15 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult PutResult(int id, TurmaModel turmaModel)
+        public ActionResult PutResult(int id, TurmaModel turma, int escolaId)
         {
             try
             {
-                _turmaRepositorio.Atualizar(turmaModel);
+                _turmaRepositorio.Atualizar(id, turma);
 
                 _turmaRepositorio.SaveChanges();
 
-                var lstTurma = _turmaRepositorio.BuscarTodos();
+                var lstTurma = _turmaRepositorio.BuscarTodos(escolaId);
 
                 return Ok(lstTurma);
             }
@@ -74,17 +74,18 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<TurmaModel> PostResult(TurmaModel turma)
+        public ActionResult<TurmaModel> PostResult(TurmaModel turma, int escolaId)
         {
             try
             {
+
+                //turma.EscolaId = escolaId;
                 _turmaRepositorio.Adicionar(turma);
                 _turmaRepositorio.SaveChanges();
 
-                var lstTurma = _turmaRepositorio.BuscarTodos();
+                var lstTurma = _turmaRepositorio.BuscarTodos(escolaId);
 
                 return Ok(lstTurma);
-
 
             }
             catch (Exception ex)
@@ -101,11 +102,11 @@ namespace Api.Controllers
             {
                 _turmaRepositorio.Excluir(id);
 
-                var turma = _turmaRepositorio.ListarPorId(id);
+                var lstTurma = _turmaRepositorio.ListarPorId(id);
 
                 _turmaRepositorio.SaveChanges();
 
-                return Ok(turma);
+                return Ok($"{ lstTurma} excluida com sucesso");
 
             }
             catch (Exception ex)
@@ -114,10 +115,6 @@ namespace Api.Controllers
             }
         }
 
-
     }
 
-
-
 }
-

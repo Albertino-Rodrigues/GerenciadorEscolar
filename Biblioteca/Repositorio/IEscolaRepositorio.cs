@@ -9,9 +9,9 @@ namespace Biblioteca.Repositorio
         List<EscolaModel> BuscarTodos();
         EscolaModel Adicionar(EscolaModel escola);
 
-        EscolaModel Atualizar(EscolaModel escola);
+        EscolaModel Atualizar(int id, EscolaModel escola);
 
-        int? SaveChanges();
+        bool SaveChanges();
 
         void Excluir(int id);
         

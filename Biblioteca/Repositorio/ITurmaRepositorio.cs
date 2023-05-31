@@ -6,12 +6,12 @@ namespace Biblioteca.Repositorio
     public interface ITurmaRepositorio
     {
         TurmaModel ListarPorId(int id);
-        List<TurmaModel> BuscarTodos();
+        List<TurmaModel> BuscarTodos(int escolaId);
         TurmaModel Adicionar(TurmaModel turma);
 
-        TurmaModel Atualizar(TurmaModel turma);
+        TurmaModel Atualizar(int id,TurmaModel turma);
 
-        bool Excluir(int id);
+        void Excluir(int id);
         bool SaveChanges();
     }
 }

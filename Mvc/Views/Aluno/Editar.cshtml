@@ -1,16 +1,20 @@
 ﻿@model Biblioteca.Models.AlunoModel;
 @{
     ViewData["Title"] = "Editar o cadastro do Aluno";
+    var turmaId = ViewBag.TurmaId;
+    <p>Turma Id: @turmaId</p>
+
 }
 <div class="text-center">
 
-    <h1 class="display-4">Editar o cadastro do Aluno</h1>
+    <h1 class="display-4">Editar o cadastro do aluno</h1>
 
 </div>
 
 <form asp-controller="Aluno" asp-action="Editar" method="post">
 
-    <input type="hidden" asp-for="Id"/>
+    <input type="hidden" asp-for="TurmaId" name="TurmaId" value="@turmaId" />
+
    <div class="form-group">
         <label for="nome"> Nome </label>
         <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o Nome">
@@ -28,8 +32,8 @@
         <input type="number" asp-for="DataNasc" class="form-control" placeholder="Digite a data de nascimento">
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block" asp-action="ConfirmarEditar" asp-controller="Aluno" asp-route-id="@Model">Alterar</button>
-    <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="Aluno" role="button">Voltar</a>
+    <button type="submit" class="btn btn-primary btn-block" asp-action="ConfirmarEditar" asp-controller="Aluno" asp-route-id="@Model.Id">Alterar</button>
+    <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="Aluno" role="button" asp-route-turmaId="@turmaId">Voltar</a>
 
 </form>
 

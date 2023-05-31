@@ -32,7 +32,7 @@
               <td>@escola.Contato</td>
               <td>
                   <div class="btn-group" role="group">
-                        <a role="button" class="btn btn-info"  asp-controller="Turma" asp-action="Index">Turmas</a>
+                                <a role="button" class="btn btn-info" asp-route-escolaId="@escola.Id" asp-controller="Turma" asp-action="Index" asp-for="EscolaId" name="EscolaId">Turmas</a>
                         <a role="button" class="btn btn-primary" asp-route-id="@escola.Id" asp-controller="Escola" asp-action="Editar">Editar</a>
                         <a role="button" class="btn btn-danger" asp-route-id="@escola.Id" asp-controller="Escola" asp-action="ExcluirConfirmacao">Excluir</a>
                   </div>

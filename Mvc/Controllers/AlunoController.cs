@@ -16,14 +16,14 @@ namespace Mvc.Controllers
     {
         HttpClient client = new HttpClient();
 
-        public IActionResult Index(AlunoModel aluno)
+        public IActionResult Index(int turmaId)
         {
+            ViewBag.TurmaId = turmaId;
             client.BaseAddress = new Uri("http://localhost:22546/api/");
-
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = client.GetAsync("aluno").Result;
+            HttpResponseMessage response = client.GetAsync($"aluno?turmaId={turmaId}").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -38,15 +38,17 @@ namespace Mvc.Controllers
 
 
         [HttpGet]
-        public IActionResult Adicionar(int id)
+        public IActionResult Adicionar(int turmaId)
         {
-
-            return View("Adicionar");
+            ViewBag.TurmaId = turmaId;
+            var alunoModel = new AlunoModel() { TurmaId = turmaId };
+            return View("Adicionar", alunoModel);
         }
 
         [HttpPost]
         public IActionResult Adicionar(AlunoModel aluno)
         {
+            ViewBag.TurmaId = aluno.TurmaId;
 
             client.BaseAddress = new Uri("http://localhost:22546/api/");
 
@@ -62,7 +64,7 @@ namespace Mvc.Controllers
             {
                 var dados = response.Content.ReadAsStringAsync();
                 var retorno = JsonConvert.DeserializeObject<List<AlunoModel>>(dados.Result);
-                return View("Index", retorno);
+                return RedirectToAction("Index", new { turmaId = aluno.TurmaId });
 
             }
 
@@ -73,6 +75,7 @@ namespace Mvc.Controllers
         [HttpGet]
         public IActionResult Editar(AlunoModel aluno)
         {
+            ViewBag.TurmaId = aluno.TurmaId;
             client.BaseAddress = new Uri("http://localhost:22546/api/aluno/" + aluno.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
@@ -103,7 +106,7 @@ namespace Mvc.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", response);
+                return RedirectToAction("Index", new {turmaId = aluno.TurmaId});
             }
             return View("Editar");
 
@@ -112,6 +115,8 @@ namespace Mvc.Controllers
         [HttpGet]
         public ActionResult<AlunoModel> ExcluirConfirmacao(AlunoModel aluno)
         {
+            ViewBag.TurmaId = aluno.TurmaId;
+
             client.BaseAddress = new Uri("http://localhost:22546/api/aluno/" + aluno.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
@@ -129,12 +134,12 @@ namespace Mvc.Controllers
 
             return View("ExcluirConfirmacao");
         }
-        public ActionResult Excluir(int id)
+        public ActionResult Excluir(int id, AlunoModel aluno)
         {
             var url = ("http://localhost:22546/api/aluno/" + id);
             var response = client.DeleteAsync(url).Result;
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { turmaId = aluno.TurmaId });
         }
 
     }

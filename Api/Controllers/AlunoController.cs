@@ -21,13 +21,13 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<AlunoModel>> GetResult()
+        public ActionResult<IEnumerable<AlunoModel>> GetResult(int turmaId)
         {
 
             try
             {
 
-                var aluno = _alunoRepositorio.BuscarTodos();
+                var aluno = _alunoRepositorio.BuscarTodos(turmaId);
                 return Ok(aluno);
             }
             catch (Exception ex)
@@ -40,7 +40,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<AlunoModel> GetResult(int id)
+        public ActionResult<AlunoModel> GetResultPorId(int id)
         {
 
             try
@@ -56,15 +56,15 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult PutResult(int id, AlunoModel alunoModel)
+        public ActionResult PutResult(int id, AlunoModel aluno, int turmaId)
         {
             try
             {
-                _alunoRepositorio.Atualizar(alunoModel);
+                _alunoRepositorio.Atualizar(id, aluno);
 
                 _alunoRepositorio.SaveChanges();
 
-                var lstAluno = _alunoRepositorio.BuscarTodos();
+                var lstAluno = _alunoRepositorio.BuscarTodos(turmaId);
 
                 return Ok(lstAluno);
             }
@@ -77,14 +77,14 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<AlunoModel> PostResult(AlunoModel aluno)
+        public ActionResult<AlunoModel> PostResult(AlunoModel aluno, int turmaId)
         {
             try
             {
                 _alunoRepositorio.Adicionar(aluno);
                 _alunoRepositorio.SaveChanges();
 
-                var lstAluno = _alunoRepositorio.BuscarTodos();
+                var lstAluno = _alunoRepositorio.BuscarTodos(turmaId);
 
                 return Ok(lstAluno);
 
@@ -104,11 +104,11 @@ namespace Api.Controllers
             {
                 _alunoRepositorio.Excluir(id);
 
-                var aluno = _alunoRepositorio.ListarPorId(id);
+                var lstAluno = _alunoRepositorio.ListarPorId(id);
 
                 _alunoRepositorio.SaveChanges();
 
-                return Ok(aluno);
+                return Ok(lstAluno);
 
             }
             catch (Exception ex)

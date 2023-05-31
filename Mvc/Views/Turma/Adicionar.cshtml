@@ -1,14 +1,20 @@
 ﻿@model Biblioteca.Models.TurmaModel;
 @{
     ViewData["Title"] = "Adicionar Turma";
+
+    var escolaId = ViewBag.EscolaId;
+    <p>Escola Id: @escolaId</p>
 }
 <div class="text-center">
 
-    <h1 class="display-4">Adicionar uma Turma</h1>
+    <h1 class="display-4">Adicionar uma turma</h1>
 
 </div>
 
 <form asp-controller="Turma" asp-action="Adicionar" method="post">
+
+    <input type="hidden" asp-for="EscolaId"  name="EscolaId" value="@escolaId" />
+
 
     <div class="form-group">
         <label for="nome"> Descrição </label>
@@ -29,7 +35,7 @@
 
 
     <button type="submit" class="btn btn-primary"> Salvar </button>
-    <a class="btn btn-secondary" asp-controller="Turma" asp-action="Index" role="button">Voltar</a>
+    <a class="btn btn-secondary" asp-controller="Turma" asp-action="Index" role="button" asp-route-escolaId="@ViewBag.EscolaId">Voltar</a>
 
 </form>
    

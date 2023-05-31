@@ -6,12 +6,12 @@ namespace Biblioteca.Repositorio
     public interface IAlunoRepositorio
     {
         AlunoModel ListarPorId(int id);
-        List<AlunoModel> BuscarTodos();
+        List<AlunoModel> BuscarTodos(int turmaId);
         AlunoModel Adicionar(AlunoModel aluno);
 
-        AlunoModel Atualizar(AlunoModel aluno);
+        AlunoModel Atualizar(int id, AlunoModel aluno);
 
-        bool Excluir(int id);
+        void Excluir(int id);
 
         bool SaveChanges();
 

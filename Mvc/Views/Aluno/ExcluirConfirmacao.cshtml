@@ -5,11 +5,18 @@
 
 <div class="text-center">
 
+	<input type="hidden" asp-for="TurmaId"  name="TurmaId" value="@ViewBag.TurmaId" />
+
 	<h3>Deseja excluir o cadastro do aluno (@Model.Nome)?</h3>
 
 </div>
 
 <br/>
 
-<a class="btn btn-danger btn-block" role="button" asp-controller="Aluno" asp-action="Excluir" asp-route-id="@Model.Id" > Confirmar </a>
-<a class="btn btn-secondary btn-block" role="button" asp-controller="Aluno" asp-action="Index"> Cancelar </a>
+<form asp-controller="Aluno" asp-action="Excluir" method="delete">
+	<input type="hidden" asp-for="TurmaId" name="TurmaId" value="@ViewBag.TurmaId" />
+
+	<a class="btn btn-danger btn-block" role="button" asp-controller="Aluno" asp-action="Excluir" asp-route-id="@Model.Id" asp-route-turmaId="@ViewBag.TurmaId"> Confirmar </a>
+	<a class="btn btn-secondary btn-block" role="button" asp-controller="Aluno" asp-action="Index"> Cancelar </a>
+
+</form>

@@ -56,11 +56,11 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult PutResult(int id,  EscolaModel escolaModel)
+        public ActionResult PutResult(int id, EscolaModel escolaModel)
         {
             try
             {
-                _escolaRepositorio.Atualizar(escolaModel);
+                _escolaRepositorio.Atualizar(id, escolaModel);
 
                 _escolaRepositorio.SaveChanges();
 

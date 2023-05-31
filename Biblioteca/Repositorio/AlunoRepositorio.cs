@@ -17,6 +17,7 @@ namespace Biblioteca.Repositorio
         }
         public AlunoModel Adicionar(AlunoModel aluno)
         {
+            var turma = _context.Turmas.FirstOrDefault(e => e.Id == aluno.TurmaId);
             if (aluno == null)
             {
                 throw new System.Exception("Houve um erro !");
@@ -27,8 +28,6 @@ namespace Biblioteca.Repositorio
             _context.SaveChanges();
 
             return aluno;
-
-
         }
 
         public AlunoModel ListarPorId(int id)
@@ -37,14 +36,14 @@ namespace Biblioteca.Repositorio
         }
 
 
-        public List<AlunoModel> BuscarTodos()
+        public List<AlunoModel> BuscarTodos(int turmaId)
         {
-            return _context.Alunos.ToList();
+            return _context.Alunos.Where(x => x.TurmaId == turmaId).ToList();
         }
 
-        public AlunoModel Atualizar(AlunoModel aluno)
+        public AlunoModel Atualizar(int id, AlunoModel aluno)
         {
-            AlunoModel alunoDB = ListarPorId(aluno.Id);
+            AlunoModel alunoDB = ListarPorId(id);
 
             if (alunoDB == null)
             {
@@ -59,19 +58,16 @@ namespace Biblioteca.Repositorio
             _context.Alunos.Update(alunoDB);
             _context.SaveChanges();
 
-            return aluno;
+            return alunoDB;
         }
 
-        public bool Excluir(int id)
+        public void Excluir(int id)
         {
-            AlunoModel alunoDB = ListarPorId(id);
+            var alunoDB = ListarPorId(id);
 
             if (alunoDB == null) throw new System.Exception("Houve um erro ao tentar excluir o cadastro!");
 
             _context.Alunos.Remove(alunoDB);
-            _context.SaveChanges();
-
-            return true;
 
         }
 
