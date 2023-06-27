@@ -1,14 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Biblioteca.Models;
-using Biblioteca.Repositorio;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System;
 using System.Net.Http.Json;
+using iText.Kernel.Pdf;
+using iText.Kernel.Geom;
+using iText.Layout;
+using iText.Layout.Element;
+using System.IO;
 
 namespace Mvc.Controllers
 {
@@ -58,6 +61,7 @@ namespace Mvc.Controllers
             var turmaContentString = new StringContent(turmaSerializada, Encoding.UTF8, "application/json");
              
             HttpResponseMessage response = client.PostAsync("turma", turmaContentString).Result;
+            //HttpResponseMessage response =  client.PostAsJsonAsync($"turma?EscolaId={escolaId}", turma);
 
             if (response.IsSuccessStatusCode)
             {

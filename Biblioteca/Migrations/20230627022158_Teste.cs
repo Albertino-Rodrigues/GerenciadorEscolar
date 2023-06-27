@@ -28,9 +28,9 @@ namespace Biblioteca.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ComposicaoEnsino = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AnoEscolar = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    ComposicaoEnsino = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    AnoEscolar = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     EscolaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -50,8 +50,8 @@ namespace Biblioteca.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cpf = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataNasc = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TurmaId = table.Column<int>(type: "int", nullable: false)
                 },

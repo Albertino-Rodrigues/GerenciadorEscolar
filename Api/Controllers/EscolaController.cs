@@ -26,7 +26,6 @@ namespace Api.Controllers
 
             try
             {
-
                var escola = _escolaRepositorio.BuscarTodos();
                 return Ok(escola);
             }

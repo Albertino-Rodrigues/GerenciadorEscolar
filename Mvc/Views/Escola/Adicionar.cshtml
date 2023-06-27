@@ -12,13 +12,13 @@
 
     <div class="form-group">
         <label for="nome"> Nome </label>
-        <input type="text" asp-for="Nome" required="required" class="form-control" placeholder="Digite o Nome">
+        <input type="text" asp-for="Nome" maxlength="50" required="required" class="form-control" placeholder="Digite o Nome">
     </div>
     
 
     <div class="form-group">
         <label for="inep"> Código INEP </label>
-        <input type="number" asp-for="Inep" required="required" class="form-control" placeholder="Digite o código INEP">
+        <input type="number" asp-for="Inep" required="required" maxlength="8" class="form-control" placeholder="Digite o código INEP">
     </div>
 
 

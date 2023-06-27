@@ -5,6 +5,67 @@
     <p>Turma Id: @turmaId</p>
 
 }
+
+@section scripts{
+    <script>
+        function ValidaCPF() {
+            var RegraValida = document.getElementById("Cpf").value;
+            var cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/;
+            if (cpfValido.test(RegraValida) == true) {
+                console.log("CPF Válido");
+            } else {
+                console.log("CPF Inválido");
+            }
+        }
+        function fMasc(objeto, mascara) {
+            obj = objeto
+            masc = mascara
+            setTimeout("fMascEx()", 1)
+        }
+
+        function fMascEx() {
+            obj.value = masc(obj.value)
+        }
+
+        function mCPF(cpf) {
+            cpf = cpf.replace(/\D/g, "")
+            cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+            cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2")
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+            return cpf
+        }
+
+        var dateInputMask = function (elm) {
+            elm.addEventListener('keypress', function (e) {
+                if (e.keyCode < 47 || e.keyCode > 57) {
+                    e.preventDefault();
+                }
+
+                var len = elm.value.length;
+
+                // If we're at a particular place, let the user type the slash
+                // i.e., 12/12/1212
+                if (len !== 1 || len !== 3) {
+                    if (e.keyCode == 47) {
+                        e.preventDefault();
+                    }
+                }
+
+                // If they don't add the slash, do it for them...
+                if (len === 2) {
+                    elm.value += '/';
+                }
+
+                // If they don't add the slash, do it for them...
+                if (len === 5) {
+                    elm.value += '/';
+                }
+            });
+        };
+    </script>
+}
+
+
 <div class="text-center">
 
     <h1 class="display-4">Editar o cadastro do aluno</h1>
@@ -15,24 +76,25 @@
 
     <input type="hidden" asp-for="TurmaId" name="TurmaId" value="@turmaId" />
 
-   <div class="form-group">
-        <label for="nome"> Nome </label>
-        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o Nome">
-    </div>
+        <div class="form-group">
+            <label for="nome"> Nome </label>
+            <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o Nome">
+        </div>
 
 
-    <div class="form-group">
-        <label for="cpf"> CPF </label>
-        <input type="number"  asp-for="Cpf" class="form-control" placeholder="Digite o CPF">
-    </div>
+        <div class="form-group" id="cpf-input">
+            <label for="cpf"> CPF </label>
+            <input type="text" asp-for="Cpf" class="form-control" maxlength="14" placeholder="Digite o CPF" onkeydown="javascript: fMasc( this, mCPF );" onclick="ValidaCPF();">
+        </div>
 
 
-    <div class="form-group">
-        <label for="contato"> Data de nascimento </label>
-        <input type="number" asp-for="DataNasc" class="form-control" placeholder="Digite a data de nascimento">
-    </div>
+        <div class="form-group" id="dataNasc-input">
+            <label for="contato"> Data de nascimento </label>
+            <input type="text" asp-for="DataNasc" class="form-control" maxlength="10" placeholder="Digite a data de nascimento" onkeypress="dateInputMask(this)">
+        </div>
 
-    <button type="submit" class="btn btn-primary btn-block" asp-action="ConfirmarEditar" asp-controller="Aluno" asp-route-id="@Model.Id">Alterar</button>
+
+        <button type="submit" class="btn btn-primary btn-block" asp-action="ConfirmarEditar" asp-controller="Aluno" asp-route-id="@Model.Id">Alterar</button>
     <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="Aluno" role="button" asp-route-turmaId="@turmaId">Voltar</a>
 
 </form>

@@ -15,7 +15,7 @@ namespace Biblioteca.Models
         [StringLength(40)]
         public string Descricao { get; set; }
 
-        [StringLength(20)]
+        [StringLength(30)]
         public string ComposicaoEnsino {get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
@@ -27,7 +27,7 @@ namespace Biblioteca.Models
 
         public virtual EscolaModel Escola { get; set; }
 
-        public List<AlunoModel> Alunos { get; set; }
+        public virtual List<AlunoModel> Alunos { get; set; }
 
     }
 }

@@ -18,7 +18,7 @@ namespace Mvc.Controllers
         HttpClient client = new HttpClient();
 
 
-        public IActionResult Index(EscolaModel escola)
+        public IActionResult Index()
         {
             client.BaseAddress = new Uri("http://localhost:22546/api/");
 

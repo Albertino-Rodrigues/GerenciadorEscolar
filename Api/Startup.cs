@@ -1,5 +1,6 @@
 using Biblioteca.Data;
 using Biblioteca.Repositorio;
+using FastReport.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,8 @@ namespace Api
             services.AddScoped<IEscolaRepositorio, EscolaRepositorio>();
             services.AddScoped<ITurmaRepositorio, TurmaRepositorio>();
             services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
+
+            FastReport.Utils.RegisteredObjects.AddConnection(typeof(MsSqlDataConnection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +60,8 @@ namespace Api
             }
 
             app.UseCors("CorsPolicy");
+
+            app.UseFastReport();
 
             app.UseRouting();
 

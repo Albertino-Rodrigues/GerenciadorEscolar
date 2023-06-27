@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Biblioteca.Repositorio;
 using Biblioteca.Data;
+using FastReport.Data;
 
 namespace Mvc 
 {
@@ -27,6 +28,8 @@ namespace Mvc
             services.AddScoped<IEscolaRepositorio, EscolaRepositorio>();
             services.AddScoped<ITurmaRepositorio, TurmaRepositorio>();
             services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
+
+            FastReport.Utils.RegisteredObjects.AddConnection(typeof(MsSqlDataConnection));
             
         }
 
@@ -43,9 +46,12 @@ namespace Mvc
             }
             app.UseStaticFiles();
 
+            app.UseFastReport();
+
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

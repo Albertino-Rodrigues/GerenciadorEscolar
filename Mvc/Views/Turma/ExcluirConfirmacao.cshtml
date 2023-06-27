@@ -11,7 +11,7 @@
 
 <br/>
 
-<form asp-controller="Turma" asp-action="Excluir" method="delete">
+<form asp-controller="Turma" asp-action="Excluir" method="get">
 	<input type="hidden" asp-for="EscolaId" name="EscolaId" value="@ViewBag.EscolaId" />
 
 	<a class="btn btn-danger btn-block" role="button" asp-controller="Turma" asp-action="Excluir" asp-route-id="@Model.Id" asp-route-escolaid="@ViewBag.EscolaId"> Confirmar </a>

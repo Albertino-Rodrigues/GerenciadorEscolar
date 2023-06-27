@@ -23,10 +23,18 @@ namespace Biblioteca.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<TurmaModel>()
+            //    .HasOne(t => t.Escola)
+            //    .WithMany(e => e.Turmas)
+            //    .HasForeignKey(t => t.IdEscola)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<TurmaModel>()
                 .Property(t => t.Id)
                 .ValueGeneratedOnAdd();
-  
+   
+
         }
 
 

@@ -7,6 +7,7 @@ namespace Biblioteca.Repositorio
     {
         TurmaModel ListarPorId(int id);
         List<TurmaModel> BuscarTodos(int escolaId);
+        List<TurmaModel> BuscarPorParametro(int escolaId, int? turmaId);
         TurmaModel Adicionar(TurmaModel turma);
 
         TurmaModel Atualizar(int id,TurmaModel turma);

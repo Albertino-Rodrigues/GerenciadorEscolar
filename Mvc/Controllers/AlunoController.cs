@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Biblioteca.Models;
-using Biblioteca.Repositorio;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using System;
+using iText.Kernel.Pdf;
+using System.IO;
+using iText.Layout;
+using iText.Layout.Element;
 
 namespace Mvc.Controllers
 {
@@ -16,8 +18,9 @@ namespace Mvc.Controllers
     {
         HttpClient client = new HttpClient();
 
-        public IActionResult Index(int turmaId)
+        public IActionResult Index(int escolaId, int turmaId)
         {
+            ViewBag.EscolaId = escolaId;
             ViewBag.TurmaId = turmaId;
             client.BaseAddress = new Uri("http://localhost:22546/api/");
             client.DefaultRequestHeaders.Accept.Add(

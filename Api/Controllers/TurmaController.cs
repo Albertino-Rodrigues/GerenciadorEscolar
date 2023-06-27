@@ -36,6 +36,24 @@ namespace Api.Controllers
 
         }
 
+        [HttpGet]
+        [Route("obtenha")]
+        public ActionResult<IEnumerable<TurmaModel>> ObtenhaTurmasPorParametro([FromQuery]int escolaId, [FromQuery] int? turmaId)
+        {
+            try
+            {
+                var turma = _turmaRepositorio.BuscarPorParametro(escolaId, turmaId);
+                return Ok(turma);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                                  $"Houve um erro: {ex.Message}.");
+
+            }
+
+        }
+
         [HttpGet("{id}")]
         public ActionResult<TurmaModel> GetResultPorId(int id)
         {
@@ -79,7 +97,6 @@ namespace Api.Controllers
             try
             {
 
-                //turma.EscolaId = escolaId;
                 _turmaRepositorio.Adicionar(turma);
                 _turmaRepositorio.SaveChanges();
 

@@ -26,15 +26,18 @@ namespace Biblioteca.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Cpf")
-                        .HasColumnType("int");
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DataNasc")
+                    b.Property<DateTime?>("DataNasc")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("TurmaId")
                         .HasColumnType("int");
@@ -81,14 +84,17 @@ namespace Biblioteca.Migrations
 
                     b.Property<string>("AnoEscolar")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ComposicaoEnsino")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<int>("EscolaId")
                         .HasColumnType("int");
@@ -114,7 +120,7 @@ namespace Biblioteca.Migrations
             modelBuilder.Entity("Biblioteca.Models.TurmaModel", b =>
                 {
                     b.HasOne("Biblioteca.Models.EscolaModel", "Escola")
-                        .WithMany("Turmas")
+                        .WithMany("ListaTurmas")
                         .HasForeignKey("EscolaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -124,7 +130,7 @@ namespace Biblioteca.Migrations
 
             modelBuilder.Entity("Biblioteca.Models.EscolaModel", b =>
                 {
-                    b.Navigation("Turmas");
+                    b.Navigation("ListaTurmas");
                 });
 
             modelBuilder.Entity("Biblioteca.Models.TurmaModel", b =>
