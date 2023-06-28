@@ -100,8 +100,6 @@ namespace Mvc.Controllers
 
             if (listaTurmas is List<TurmaModel> turmas)
             {
-                try
-                {
                     string caminhoDoArquivo = @"C:\arquivo.pdf";
                     PdfWriter writer = new PdfWriter(caminhoDoArquivo);
                     PdfDocument pdf = new PdfDocument(writer);
@@ -154,11 +152,7 @@ namespace Mvc.Controllers
                     Response.Headers.Add("Content-Disposition", contentDisposition.ToString());
 
                     return File(fileBytes, "application/pdf");
-                }
-                catch
-                {
-                    throw new Exception("Ocorreu um erro ao gerar o relatório");
-                }
+                
             }
             else
             {
