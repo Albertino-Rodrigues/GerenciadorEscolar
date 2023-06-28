@@ -17,7 +17,6 @@ namespace Biblioteca.Repositorio
         }
         public AlunoModel Adicionar(AlunoModel aluno)
         {
-            var turma = _context.Turmas.FirstOrDefault(e => e.Id == aluno.TurmaId);
             if (aluno == null)
             {
                 throw new System.Exception("Houve um erro !");

@@ -22,7 +22,7 @@ namespace Mvc.Controllers
         {
             ViewBag.EscolaId = escolaId;
             ViewBag.TurmaId = turmaId;
-            client.BaseAddress = new Uri("http://localhost:22546/api/");
+            client.BaseAddress = new Uri("http://localhost:14708/api/");
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -53,7 +53,7 @@ namespace Mvc.Controllers
         {
             ViewBag.TurmaId = aluno.TurmaId;
 
-            client.BaseAddress = new Uri("http://localhost:22546/api/");
+            client.BaseAddress = new Uri("http://localhost:14708/api/");
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -79,7 +79,7 @@ namespace Mvc.Controllers
         public IActionResult Editar(AlunoModel aluno)
         {
             ViewBag.TurmaId = aluno.TurmaId;
-            client.BaseAddress = new Uri("http://localhost:22546/api/aluno/" + aluno.Id);
+            client.BaseAddress = new Uri("http://localhost:14708/api/aluno/" + aluno.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -99,7 +99,7 @@ namespace Mvc.Controllers
 
         public IActionResult ConfirmarEditar(AlunoModel aluno)
         {
-            var url = "http://localhost:22546/api/aluno/" + aluno.Id;
+            var url = "http://localhost:14708/api/aluno/" + aluno.Id;
 
             var json = JsonConvert.SerializeObject(aluno, Formatting.Indented);
             var buffer = Encoding.UTF8.GetBytes(json);
@@ -120,7 +120,7 @@ namespace Mvc.Controllers
         {
             ViewBag.TurmaId = aluno.TurmaId;
 
-            client.BaseAddress = new Uri("http://localhost:22546/api/aluno/" + aluno.Id);
+            client.BaseAddress = new Uri("http://localhost:14708/api/aluno/" + aluno.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -139,7 +139,7 @@ namespace Mvc.Controllers
         }
         public ActionResult Excluir(int id, AlunoModel aluno)
         {
-            var url = ("http://localhost:22546/api/aluno/" + id);
+            var url = ("http://localhost:14708/api/aluno/" + id);
             var response = client.DeleteAsync(url).Result;
 
             return RedirectToAction("Index", new { turmaId = aluno.TurmaId });

@@ -77,14 +77,14 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<AlunoModel> PostResult(AlunoModel aluno, int turmaId)
+        public ActionResult<AlunoModel> PostResult(AlunoModel aluno)
         {
             try
             {
                 _alunoRepositorio.Adicionar(aluno);
                 _alunoRepositorio.SaveChanges();
 
-                var lstAluno = _alunoRepositorio.BuscarTodos(turmaId);
+                var lstAluno = _alunoRepositorio.BuscarTodos(aluno.TurmaId);
 
                 return Ok(lstAluno);
 

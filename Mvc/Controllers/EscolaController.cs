@@ -20,7 +20,7 @@ namespace Mvc.Controllers
 
         public IActionResult Index()
         {
-            client.BaseAddress = new Uri("http://localhost:22546/api/");
+            client.BaseAddress = new Uri("http://localhost:14708/api/");
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -50,7 +50,7 @@ namespace Mvc.Controllers
         public IActionResult Adicionar(EscolaModel escola)
         {
 
-            client.BaseAddress = new Uri("http://localhost:22546/api/");
+            client.BaseAddress = new Uri("http://localhost:14708/api/");
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -75,7 +75,7 @@ namespace Mvc.Controllers
         [HttpGet]
         public IActionResult Editar(EscolaModel escola)
         {
-            client.BaseAddress = new Uri("http://localhost:22546/api/escola/" + escola.Id);
+            client.BaseAddress = new Uri("http://localhost:14708/api/escola/" + escola.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -95,7 +95,7 @@ namespace Mvc.Controllers
 
         public IActionResult ConfirmarEditar(EscolaModel escola)
         {
-            var url = "http://localhost:22546/api/escola/" + escola.Id;
+            var url = "http://localhost:14708/api/escola/" + escola.Id;
 
             string json = JsonConvert.SerializeObject(escola, Formatting.Indented);
             var buffer = System.Text.Encoding.UTF8.GetBytes(json);
@@ -114,7 +114,7 @@ namespace Mvc.Controllers
         [HttpGet]
         public ActionResult<EscolaModel> ExcluirConfirmacao(EscolaModel escola)
         {
-            client.BaseAddress = new Uri("http://localhost:22546/api/escola/" + escola.Id);
+            client.BaseAddress = new Uri("http://localhost:14708/api/escola/" + escola.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -133,7 +133,7 @@ namespace Mvc.Controllers
         }
         public ActionResult Excluir(int id)
         {
-            var url = ("http://localhost:22546/api/escola/" + id);
+            var url = ("http://localhost:14708/api/escola/" + id);
             var response = client.DeleteAsync(url).Result;
 
             return RedirectToAction("Index");

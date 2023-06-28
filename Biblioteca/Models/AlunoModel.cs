@@ -14,12 +14,11 @@ namespace Biblioteca.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [StringLength(11)]
-        [DataType(DataType.Password)]
+        [StringLength(14)]
         public string Cpf { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        public DateTime? DataNasc { get; set; }
+        public string DataNasc { get; set; }
 
         [ForeignKey("EscolaId")]
         public int TurmaId { get; set; }

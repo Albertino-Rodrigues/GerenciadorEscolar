@@ -19,6 +19,7 @@ using System.Linq;
 using iText.Kernel.Geom;
 using System.Reflection;
 using iText.Layout.Properties;
+using Microsoft.Build.Tasks;
 
 namespace Mvc.Controllers
 {
@@ -31,7 +32,7 @@ namespace Mvc.Controllers
             using (HttpClient client = new HttpClient())
             {
 
-                client.BaseAddress = new Uri("http://localhost:22546/api/");
+                client.BaseAddress = new Uri("http://localhost:14708/api/");
 
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
@@ -48,15 +49,15 @@ namespace Mvc.Controllers
             }
         }
 
-        private async Task<List<TurmaModel>> ResponseTurmas(int escolaId, int? turmaId)
+        private async Task<List<TurmaModel>> ResponseTurmas(int escolaId)
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:22546/api/turma/obtenha");
+                client.BaseAddress = new Uri("http://localhost:14708/api/turma/obtenha");
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage responseTurma = await client.GetAsync($"?escolaId={escolaId}&turmaId={turmaId}");
+                HttpResponseMessage responseTurma = await client.GetAsync($"?escolaId={escolaId}");
 
                 if (responseTurma.IsSuccessStatusCode)
                 {
@@ -74,7 +75,7 @@ namespace Mvc.Controllers
         {
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:22546/api/");
+                client.BaseAddress = new Uri("http://localhost:14708/api/");
                 client.DefaultRequestHeaders.Accept.Add(
                     new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -95,9 +96,7 @@ namespace Mvc.Controllers
         public async Task<IActionResult> Index(int escolaId, int? turmaId)
         {
             var escola = await ResponseEscolas(escolaId);
-            var listaTurmas = await ResponseTurmas(escolaId, turmaId);
-            //var listaAlunos = ResponseAlunos(turmaId);
-            //TurmaModel turma = new TurmaModel();
+            var listaTurmas = await ResponseTurmas(escolaId);
 
             if (listaTurmas is List<TurmaModel> turmas)
             {
@@ -108,19 +107,16 @@ namespace Mvc.Controllers
                     PdfDocument pdf = new PdfDocument(writer);
                     Document document = new Document(pdf, PageSize.A4, false);
 
-                    //Define o estilo para o titulo
 
                     Style tituloStyle = new Style()
                         .SetTextAlignment(TextAlignment.CENTER)
                         .SetFontSize(18);
 
-                    //Define o estilo para o nome da turma
                     Style turmaStyle = new Style()
                         .SetTextAlignment(TextAlignment.CENTER)
                         .SetFontSize(14)
                         .SetBold();
 
-                    //Titulo
 
                     document.Add(new Paragraph("Lista de alunos").AddStyle(tituloStyle));
                     document.Add(new Paragraph(escola.Nome).AddStyle(tituloStyle));
@@ -136,18 +132,15 @@ namespace Mvc.Controllers
                         var alunos = await ResponseAlunos(turma.Id);
                         foreach (AlunoModel aluno in alunos)
                         {
-                            // Adicione um parágrafo de texto com o nome do aluno
                             Paragraph nomeAluno = new Paragraph("Nome: " + aluno.Nome);
                             document.Add(nomeAluno);
 
-                            // Adicione uma tabela com informações adicionais do aluno
                             Table tabelaInformacoes = new Table(1);
                             tabelaInformacoes.AddCell("CPF: " + aluno.Cpf);
-                            tabelaInformacoes.AddCell("Data de nascimento: " + aluno.DataNasc?.ToShortDateString());
+                            tabelaInformacoes.AddCell("Data de nascimento: " + aluno.DataNasc);
 
                             document.Add(tabelaInformacoes);
 
-                            // Adicione uma quebra de linha entre os alunos
                             document.Add(new Paragraph("\n"));
                         }
                     }
@@ -155,14 +148,11 @@ namespace Mvc.Controllers
 
                     document.Close();
 
-                    // Lê o conteúdo do arquivo PDF em bytes
                     byte[] fileBytes = System.IO.File.ReadAllBytes(caminhoDoArquivo);
 
-                    // Define o cabeçalho Content-Disposition para abrir o arquivo em uma nova guia do navegador
                     var contentDisposition = new ContentDispositionHeaderValue("inline");
                     Response.Headers.Add("Content-Disposition", contentDisposition.ToString());
 
-                    // Retorna o arquivo PDF como um FileContentResult
                     return File(fileBytes, "application/pdf");
                 }
                 catch
@@ -172,10 +162,8 @@ namespace Mvc.Controllers
             }
             else
             {
-                throw new Exception("Ocorreu um erro ao gerar o relatório");
+                return BadRequest("Ocorreu um erro ao gerar o relatório");
             }
-
-            return View("Index");
         }
 
 

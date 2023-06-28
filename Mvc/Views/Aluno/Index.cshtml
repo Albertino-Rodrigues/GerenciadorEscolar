@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Lista de Alunos";
     var turmaId = ViewBag.TurmaId;
-    <p>Turma Id: @turmaId</p>
 
 }
 <div class="text-center">
@@ -32,7 +31,7 @@
               <th scope="row">@aluno.Id</th>
               <td>@aluno.Nome</td>
               <td>@aluno.Cpf</td>
-              <td>@aluno.DataNasc?.ToString("dd/MM/yyyy")</td>
+              <td>@aluno.DataNasc</td>
               <td>
                   <div class="btn-group" role="group">
                                 <a role="button" class="btn btn-primary" asp-route-id="@aluno.Id" asp-controller="Aluno" asp-action="Editar" asp-route-turmaId="@ViewBag.TurmaId">Editar</a>

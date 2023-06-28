@@ -21,7 +21,7 @@ namespace Biblioteca.Models
         [Required(ErrorMessage = "Campo obrigatório")]
         public string Contato { get; set; }
 
-        //[InverseProperty("Escola")]
-        public  List<TurmaModel> ListaTurmas { get; set; }
+        [InverseProperty("Escola")]
+        public virtual List<TurmaModel> ListaTurmas { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Mvc.Controllers
         public IActionResult Index(int escolaId)
         {
             ViewBag.EscolaId = escolaId;    
-            client.BaseAddress = new Uri("http://localhost:22546/api/");
+            client.BaseAddress = new Uri("http://localhost:14708/api/");
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -53,7 +53,7 @@ namespace Mvc.Controllers
         public IActionResult Adicionar(TurmaModel turma)
         {
             ViewBag.EscolaId = turma.EscolaId;
-            client.BaseAddress = new Uri("http://localhost:22546/api/");
+            client.BaseAddress = new Uri("http://localhost:14708/api/");
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -61,7 +61,6 @@ namespace Mvc.Controllers
             var turmaContentString = new StringContent(turmaSerializada, Encoding.UTF8, "application/json");
              
             HttpResponseMessage response = client.PostAsync("turma", turmaContentString).Result;
-            //HttpResponseMessage response =  client.PostAsJsonAsync($"turma?EscolaId={escolaId}", turma);
 
             if (response.IsSuccessStatusCode)
             {
@@ -80,7 +79,7 @@ namespace Mvc.Controllers
         {
             ViewBag.EscolaId = turma.EscolaId;
 
-            client.BaseAddress = new Uri("http://localhost:22546/api/turma/" + turma.Id);
+            client.BaseAddress = new Uri("http://localhost:14708/api/turma/" + turma.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -101,7 +100,7 @@ namespace Mvc.Controllers
 
         public IActionResult ConfirmarEditar(TurmaModel turma)
         {
-            var url = "http://localhost:22546/api/turma/" + turma.Id;
+            var url = "http://localhost:14708/api/turma/" + turma.Id;
 
             string json = JsonConvert.SerializeObject(turma, Formatting.Indented);
             var buffer = Encoding.UTF8.GetBytes(json);
@@ -123,7 +122,7 @@ namespace Mvc.Controllers
         {
             ViewBag.EscolaId = turma.EscolaId;
 
-            client.BaseAddress = new Uri("http://localhost:22546/api/turma/" + turma.Id);
+            client.BaseAddress = new Uri("http://localhost:14708/api/turma/" + turma.Id);
 
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -142,7 +141,7 @@ namespace Mvc.Controllers
         }
         public ActionResult Excluir(int id, TurmaModel turma)
         {
-            var url = ("http://localhost:22546/api/turma/" + id);
+            var url = ("http://localhost:14708/api/turma/" + id);
             var response = client.DeleteAsync(url).Result;
 
             return RedirectToAction("Index", new { escolaId = turma.EscolaId});

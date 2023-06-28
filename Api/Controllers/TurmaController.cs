@@ -38,11 +38,11 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("obtenha")]
-        public ActionResult<IEnumerable<TurmaModel>> ObtenhaTurmasPorParametro([FromQuery]int escolaId, [FromQuery] int? turmaId)
+        public ActionResult<IEnumerable<TurmaModel>> ObtenhaTurmasPorParametro([FromQuery]int escolaId)
         {
             try
             {
-                var turma = _turmaRepositorio.BuscarPorParametro(escolaId, turmaId);
+                var turma = _turmaRepositorio.BuscarPorParametro(escolaId);
                 return Ok(turma);
             }
             catch (Exception ex)

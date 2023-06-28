@@ -19,7 +19,6 @@ namespace Biblioteca.Repositorio
         }
         public TurmaModel Adicionar(TurmaModel turma)
         {
-            //turma.Id = 0;
             var escola = _context.Escolas.FirstOrDefault(e => e.Id == turma.EscolaId);
             if (turma == null)
             {
@@ -27,7 +26,6 @@ namespace Biblioteca.Repositorio
 
                 
             }
-            //turma.EscolaId = escolaId;
             _context.Turmas.Add(turma);
             _context.SaveChanges();
 
@@ -47,18 +45,14 @@ namespace Biblioteca.Repositorio
             return _context.Turmas.Where(x => x.EscolaId == escolaId).ToList();
         }
 
-        public List<TurmaModel> BuscarPorParametro(int escolaId, int? turmaId)
+        public List<TurmaModel> BuscarPorParametro(int escolaId)
         {
-            if (turmaId.HasValue)
-                return _context.Turmas.Where(x => x.EscolaId == escolaId && x.Id == turmaId).ToList();
-
-            return _context.Turmas.Where(x => x.EscolaId == escolaId).ToList();
+                return _context.Turmas.Where(x => x.EscolaId == escolaId).ToList();
         }
 
         public TurmaModel Atualizar(int id, TurmaModel turma)
         {
             TurmaModel turmaDB = ListarPorId(id);
-            //turma = ListarPorId(id);
 
             if (turmaDB == null)
             {
@@ -84,7 +78,6 @@ namespace Biblioteca.Repositorio
             if (turmaDB == null) throw new System.Exception("Houve um erro ao tentar excluir o cadastro!");
 
             _context.Turmas.Remove(turmaDB);
-           // _context.SaveChanges();
 
         }
 

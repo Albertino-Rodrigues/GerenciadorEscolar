@@ -2,6 +2,21 @@
 @{
     ViewData["Title"] = "Editar o cadastro da Escola";
 }
+
+@section scripts{
+
+    <script>
+        function Decimais(obj, e) {
+            var tecla = (window.event) ? e.keyCode : e.which;
+            if (tecla == 8 || tecla == 0)
+                return true;
+            if (tecla < 48 || tecla > 57)
+                return false;
+        }
+    </script>
+
+}
+
 <div class="text-center">
 
     <h1 class="display-4">Editar Escola</h1>
@@ -16,20 +31,19 @@
         
     </div>
 
-    <div class="form-group">
-        <label for="inep" class="form-label">Código INEP</label>
-        <input type="text" asp-for="Inep" class="form-control" placeholder="Digite o código INEP">
-       
-    </div>
+        <div class="form-group">
+            <label for="inep"> Código INEP </label>
+            <input type="text" asp-for="Inep" required="required" maxlength="8" class="form-control" placeholder="Digite o código INEP" onkeypress="return Decimais( this , event ) ;">
+        </div>
 
     <div class="form-group">
         <label for="contato" class="form-label">Contato</label>
-        <input type="text" asp-for="Contato" class="form-control" placeholder="Digite o contato">
+        <input type="text" asp-for="Contato" maxlength="15" class="form-control" placeholder="Digite o contato">
         
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block" asp-action="ConfirmarEditar" asp-controller="Escola" asp-route-id="@Model">Alterar</button>
-    <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="Escola" role="button">Voltar</a>
+    <button type="submit" class="btn btn-primary" asp-action="ConfirmarEditar" asp-controller="Escola" asp-route-id="@Model.Id">Alterar</button>
+    <a class="btn btn-secondary" asp-action="Index" asp-controller="Escola" role="button">Voltar</a>
 
 </form>
 

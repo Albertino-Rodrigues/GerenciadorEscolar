@@ -2,8 +2,6 @@
 @{
     ViewData["Title"] = "Adicionar um aluno";
     var turmaId = ViewBag.TurmaId;
-    <p>Turma Id: @turmaId</p>
-
 }
 
 @section scripts{
@@ -34,6 +32,8 @@
             cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
             return cpf
         }
+
+
 
         var dateInputMask = function(elm) {
             elm.addEventListener('keypress', function (e) {
@@ -81,20 +81,20 @@
     </div>
     
 
-    <div class="form-group" id="cpf-input">
+    <div class="form-group">
         <label for="cpf"> CPF </label>
             <input type="text" asp-for="Cpf" class="form-control" maxlength="14" placeholder="Digite o CPF" onkeydown="javascript: fMasc( this, mCPF );" onclick="ValidaCPF();">
     </div>
 
 
-    <div class="form-group" id="dataNasc-input">
+    <div class="form-group">
         <label for="contato"> Data de nascimento </label>
             <input type="text" asp-for="DataNasc" class="form-control" maxlength="10" placeholder="Digite a data de nascimento" onkeypress="dateInputMask(this)">
     </div>
 
 
     <button type="submit" class="btn btn-primary"> Salvar</button>
-    <a class="btn btn-secondary" asp-controller="Aluno" asp-action="Index" role="button" asp-route-turmaId="@ViewBag.TurmaId">Voltar</a>
+    <a class="btn btn-secondary" asp-action="Index" asp-controller="Aluno" role="button" asp-route-turmaId="@turmaId">Voltar</a>
 
 </form>
    
